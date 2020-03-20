@@ -102,4 +102,3 @@ source $ZSH/oh-my-zsh.sh
 powerline-daemon -q
 . /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
