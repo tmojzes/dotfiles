@@ -99,6 +99,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 # Custom config
-powerline-daemon -q
-. /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+source /home/tmojzes/.config/broot/launcher/bash/br
+#export PATH=$PATH:/home/tmojzes/.cargo/bin
+export JAVA_HOME="/usr/lib/jvm/java-13-openjdk-amd64"
+export PATH=$PATH:$JAVA_HOME/bin
