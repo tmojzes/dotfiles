@@ -87,7 +87,7 @@ source $ZSH/oh-my-zsh.sh
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+ export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -95,13 +95,17 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-# Custom config
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+ alias zshconfig="vim ~/.zshrc"
+ alias ohmyzsh="vim ~/.oh-my-zsh"
 
+# Custom config
+UPGRADE='sudo apt update && sudo apt upgrade -y && sudo snap refresh && cargo-install-update install-update --all'
+CARGO_HOME='/home/tmojzes/.cargo'
+
+alias upgrade=$UPGRADE
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 source /home/tmojzes/.config/broot/launcher/bash/br
-#export PATH=$PATH:/home/tmojzes/.cargo/bin
+export EDITOR='vim'
 export JAVA_HOME="/usr/lib/jvm/java-13-openjdk-amd64"
-export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$PATH:$JAVA_HOME/bin:$CARGO_HOME/bin
+
