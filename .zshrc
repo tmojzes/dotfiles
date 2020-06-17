@@ -27,7 +27,7 @@ ZSH_THEME="agnoster"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -42,10 +42,10 @@ ZSH_THEME="agnoster"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -87,7 +87,7 @@ source $ZSH/oh-my-zsh.sh
 # fi
 
 # Compilation flags
- export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -95,17 +95,25 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
- alias zshconfig="vim ~/.zshrc"
- alias ohmyzsh="vim ~/.oh-my-zsh"
-
+alias zshconfig="vim  ~/.zshrc"
+alias ohmyzsh="vim ~/.oh-my-zsh"
+#
 # Custom config
 UPGRADE='sudo apt update && sudo apt upgrade -y && sudo snap refresh && cargo-install-update install-update --all'
 CARGO_HOME='/home/tmojzes/.cargo'
 
+source /home/tmojzes/.config/broot/launcher/bash/br
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+autoload zmv
+
 alias upgrade=$UPGRADE
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-source /home/tmojzes/.config/broot/launcher/bash/br
+alias drun='docker run -it --network=host --device=/dev/kfd --device=/dev/dri --ipc=host --shm-size 16G --group-add video --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --mount type=bind,source=$HOME/python-projects/pollen-recognizer,target=/root/python-projects/pollen-recognizer'
+alias radeontop='sudo radeontop'
+
 export EDITOR='vim'
 export JAVA_HOME="/usr/lib/jvm/java-13-openjdk-amd64"
-export PATH=$PATH:$JAVA_HOME/bin:$CARGO_HOME/bin
-
+export PATH=$PATH:$JAVA_HOME/bin:$CARGO_HOME/bin:$HOME/.pyenv/bin"
