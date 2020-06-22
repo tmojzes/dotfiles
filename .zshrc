@@ -104,9 +104,6 @@ CARGO_HOME='/home/tmojzes/.cargo'
 
 source /home/tmojzes/.config/broot/launcher/bash/br
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 autoload zmv
 
 alias upgrade=$UPGRADE
@@ -117,3 +114,5 @@ alias radeontop='sudo radeontop'
 export EDITOR='vim'
 export JAVA_HOME="/usr/lib/jvm/java-13-openjdk-amd64"
 export PATH="$PATH:$JAVA_HOME/bin:$CARGO_HOME/bin:$HOME/.pyenv/bin"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
