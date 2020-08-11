@@ -110,6 +110,7 @@ alias upgrade=$UPGRADE
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias drun='docker run -it --network=host --device=/dev/kfd --device=/dev/dri --ipc=host --shm-size 16G --group-add video --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --mount type=bind,source=$HOME/python-projects/pollen-recognizer,target=/root/python-projects/pollen-recognizer'
 alias radeontop='sudo radeontop'
+alias aokvpn="sudo openconnect -u motxaap.pte --passwd-on-stdin vpn1.kk.pte.hu/aok-kk"
 
 export EDITOR='vim'
 export JAVA_HOME="/usr/lib/jvm/java-13-openjdk-amd64"
