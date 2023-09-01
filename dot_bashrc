@@ -116,14 +116,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-[[ -s "/home/tmojzes/.gvm/scripts/gvm" ]] && source "/home/tmojzes/.gvm/scripts/gvm"
-
 ## Custom path config
 # GOPATH for microservices testing
 # export GOPATH=/home/tmojzes/Projects/microservice/testing_ms
 ZIG_PATH="/usr/local/zig"
 DOOM_EMACS_PATH="$HOME/.config/emacs/bin"
-export PATH=$PATH:/usr/local/go/bin:$HOME/.cargo/bin:"${KREW_ROOT:-$HOME/.krew}/bin":$ZIG_PATH:$DOOM_EMACS_PATH
+export PATH=$PATH:$HOME/go/bin:$HOME/.cargo/bin:"${KREW_ROOT:-$HOME/.krew}/bin":$ZIG_PATH:$DOOM_EMACS_PATH
 
 # Go env variables
 export GONOPROXY="gitlabe2.ext.net.nokia.com"
@@ -141,7 +139,6 @@ alias sopse="sops --encrypt --age $(cat $SOPS_AGE_KEY_FILE | grep -oP 'public ke
 alias sopsd="sops --decrypt --age $(cat $SOPS_AGE_KEY_FILE | grep -oP 'public key: \K(.*)') -i"
 alias upgrade="sudo apt update && sudo apt upgrade -y && flatpak update -y && go-global-update"
 alias emacs="emacsclient -c -a 'emacs'"
-alias 
 
 # Completions
 source <(talosctl completion bash)
@@ -152,7 +149,8 @@ source <(k3d completion bash)
 source <(kubectl krew completion bash)
 source <(clusterctl completion bash)
 source <(helm completion bash)
+source <(pdm completion bash)
+complete -C /home/tmojzes/go/bin/gocomplete go
 
 eval "$(starship init bash)"
 
-complete -C /home/tmojzes/.gvm/pkgsets/go1.19.4/global/bin/gocomplete go
