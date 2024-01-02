@@ -40,7 +40,7 @@ output * bg $HOME/Pictures/kame_house.png fill
 #          before-sleep 'swaylock -f -c 000000'
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+# resumed. It will also lock your screen before your computer g1010oes to sleep.
     exec swayidle -w \
             timeout 900 '~/.config/sway/swaylock.sh' \
             timeout 905 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
@@ -65,6 +65,10 @@ output * bg $HOME/Pictures/kame_house.png fill
    input type:keyboard {
 	xkb_layout hu
    }
+
+# Gaps config:
+gaps inner 5
+smart_gaps off
 
 # Disable laptop display when lid is closed.
 # FIX: Device screen won't be enabled when waking up form sleep or no external display is attached.
