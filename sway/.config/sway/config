@@ -70,10 +70,10 @@ output * bg $HOME/Pictures/kame_house.png fill
 gaps inner 5
 smart_gaps off
 
-# Disable laptop display when lid is closed.
-# FIX: Device screen won't be enabled when waking up form sleep or no external display is attached.
-# bindswitch lid:on output eDP-1 disable
-# bindswitch lid:off output eDP-1 enable
+### Clamshell Mode
+set $laptop eDP-1
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
 
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
@@ -258,5 +258,8 @@ bindsym $mod+Shift+q exec --no-startup-id ~/.config/sway/swaylock.sh
 bar { 
     swaybar_command waybar
 }
+
+# Hide cursor when typing.
+seat * hide_cursor when-typing enable
 
 include /etc/sway/config.d/*
