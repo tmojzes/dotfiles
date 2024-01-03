@@ -9,3 +9,5 @@ data
 # LazyVim specific files
 lazy-lock.json
 lazyvim.json
+# Lazygit specific files
+lazygit/.config/lazygit
