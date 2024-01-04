@@ -76,4 +76,17 @@ return {
 		keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
 		config = true,
 	},
+
+	-- linters
+	{
+		"mfussenegger/nvim-lint",
+		opts = {
+			linters_by_ft = {
+				-- global linter for spell checking
+				["*"] = { "codespell" },
+				-- linter for go
+				go = { "golangcilint" },
+			},
+		},
+	},
 }

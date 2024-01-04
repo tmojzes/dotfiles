@@ -17,6 +17,7 @@ return {
 				"gofumpt",
 				"goimports",
 				"zls",
+				"codespell",
 			})
 		end,
 	},
