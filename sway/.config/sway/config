@@ -239,10 +239,10 @@ bindsym $mod+r mode "resize"
 #
 
 # capture all screens to clipboard    
-bindsym $mod+Shift+s exec grim - | wl-copy    
+bindsym Alt+Shift+s exec grim - | wl-copy    
     
 # capture the specified screen area to clipboard    
-bindsym Alt+Shift+s exec grim -g "$(slurp)" - | wl-copy    
+bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy    
     
 # capture the focused monitor to clipboard    
 bindsym Control+Shift+s exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
