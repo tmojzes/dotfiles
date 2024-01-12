@@ -6,6 +6,8 @@ return {
 			ensure_installed = {
 				"bash",
 				"html",
+				"scss",
+				"templ",
 				"javascript",
 				"json",
 				"lua",
@@ -25,7 +27,6 @@ return {
 				"java",
 				"css",
 				"sql",
-				"scss",
 			},
 		},
 	},

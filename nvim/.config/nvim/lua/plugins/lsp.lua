@@ -9,15 +9,17 @@ return {
 				"shfmt",
 				"flake8",
 				"luacheck",
-				"shfmt",
 				"tailwindcss-language-server",
 				"css-lsp",
+				"html-lsp",
+				"htmx-lsp",
 				"gopls",
 				"golangci-lint",
 				"gofumpt",
 				"goimports",
 				"zls",
 				"codespell",
+				"templ",
 			})
 		end,
 	},
@@ -40,5 +42,100 @@ return {
 				--[[add your custom lualine config here]]
 			}
 		end,
+	},
+	-- {
+	--
+	-- 		nvim_lsp = require("lspconfig")
+	-- 		nvim_lsp.htmx.setup({
+	-- 			filetypes = function(filetypes)
+	-- 				vim.list_extend(filetypes, {
+	-- 					"templ",
+	-- 				})
+	-- 			end,
+	-- 		})
+	-- 		nvim_lsp.tailwindcss.setup({
+	-- 			filetypes = function(filetypes)
+	-- 				vim.list_extend(filetypes, {
+	-- 					"templ",
+	-- 				})
+	-- 			end,
+	-- 		})
+	-- 		nvim_lsp.cssls.setup({
+	-- 			filetypes = function(filetypes)
+	-- 				vim.list_extend(filetypes, {
+	-- 					"templ",
+	-- 				})
+	-- 			end,
+	-- 		})
+	-- },
+	-- lsp servers
+	{
+		"neovim/nvim-lspconfig",
+		opts = {
+			servers = {
+				cssls = {
+					filetypes = { "css", "scss", "less" },
+				},
+				htmx = {
+					filetypes = { "html", "templ" },
+				},
+				tailwindcss = {
+					root_dir = function(...)
+						return require("lspconfig.util").root_pattern(".git")(...)
+					end,
+					filetypes = {
+						"aspnetcorerazor",
+						"astro",
+						"astro-markdown",
+						"blade",
+						"clojure",
+						"django-html",
+						"htmldjango",
+						"edge",
+						"eelixir",
+						"elixir",
+						"ejs",
+						"erb",
+						"eruby",
+						"gohtml",
+						"gohtmltmpl",
+						"haml",
+						"handlebars",
+						"hbs",
+						"html",
+						"html-eex",
+						"heex",
+						"jade",
+						"leaf",
+						"liquid",
+						"markdown",
+						"mdx",
+						"mustache",
+						"njk",
+						"nunjucks",
+						"php",
+						"razor",
+						"slim",
+						"twig",
+						"css",
+						"less",
+						"postcss",
+						"sass",
+						"scss",
+						"stylus",
+						"sugarss",
+						"javascript",
+						"javascriptreact",
+						"reason",
+						"rescript",
+						"typescript",
+						"typescriptreact",
+						"vue",
+						"svelte",
+						"templ",
+					},
+				},
+			},
+		},
 	},
 }
