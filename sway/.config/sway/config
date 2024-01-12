@@ -279,4 +279,8 @@ bar {
 # Hide cursor when typing.
 seat * hide_cursor when-typing enable
 
+# Enable gnome polkit authentication agent for
+# enabling gui apps to run as root when required.
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
 include /etc/sway/config.d/*
