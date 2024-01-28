@@ -1,4 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+current_folder=${pwd}
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+root_folder=$(cd ${script_dir} && git rev-parse --show-toplevel && cd ${current_folder})
 
 all_packages=($(pacman -Qqe))
 base_devel_packages=($(pacman -Sg base-devel | cut -f 2 -d " "))
@@ -10,6 +14,6 @@ done
 
 all_packages=("${all_packages[@]/"$del"/}")
 
-printf "%s\n" "${all_packages[@]}" >~/.pacman.list
+printf "%s\n" "${all_packages[@]}" >${root_folder}/programs/.local/.pacman.list
 
-cat ~/.pacman.list
+cat ${root_folder}/programs/.local/.pacman.list
