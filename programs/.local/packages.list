@@ -148,6 +148,7 @@ xf86-video-intel
 xorg-server
 xorg-xinit
 xorg-xwayland
+yay-bin
 zip
 zram-generator
 zsh
