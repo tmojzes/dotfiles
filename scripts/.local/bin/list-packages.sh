@@ -14,6 +14,6 @@ done
 
 all_packages=("${all_packages[@]/"$del"/}")
 
-printf "%s\n" "${all_packages[@]}" >${root_folder}/programs/.local/.pacman.list
+printf "%s\n" "${all_packages[@]}" >${root_folder}/programs/.local/packages.list
 
-cat ${root_folder}/programs/.local/.pacman.list
+cat ${root_folder}/programs/.local/packages.list
