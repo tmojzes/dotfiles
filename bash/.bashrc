@@ -35,6 +35,9 @@ export XDG_DATA_HOME=$HOME/.local/share/
 # source <(pdm completion bash)
 # complete -C /home/tmojzes/go/bin/gocomplete go
 
+# Scaleway CLI autocomplete initialization.
+eval "$(scw autocomplete script shell=bash)"
+
 # Set vi mode
 set -o vi
 
