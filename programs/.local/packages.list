@@ -18,6 +18,8 @@ delve
 dmenu
 dmidecode
 dnsmasq
+docker
+docker-buildx
 efibootmgr
 fastly-bin
 fd
@@ -29,6 +31,7 @@ fwupd-docs
 fwupd-efi
 gdb
 git
+gnome-calculator
 gnome-disk-utility
 go
 google-chrome
@@ -45,8 +48,6 @@ htop
 intel-media-driver
 intel-ucode
 iptables-nft
-iwd
-iwgtk
 k9s
 kubectl
 lazygit
@@ -69,11 +70,13 @@ mako
 man-db
 mesa-vdpau
 mlocate
+modemmanager
 mpv
 nano
 neofetch
 neovim
-nextcloud-client
+networkmanager
+nm-connection-editor
 noto-fonts-emoji
 npm
 obsidian
@@ -88,15 +91,15 @@ pipewire
 pipewire-alsa
 pipewire-jack
 pipewire-pulse
-podman
-podman-docker
 polkit-gnome
 powertop
 qemu-full
 reflector
 ripgrep
 ristretto
+rp-pppoe
 rustup
+scaleway-cli
 slurp
 smartmontools
 smbclient
@@ -109,6 +112,7 @@ swaybg
 swayidle
 swayimg
 swaylock-effects
+tailwindcss-bin
 talosctl
 thunar
 thunar-archive-plugin
