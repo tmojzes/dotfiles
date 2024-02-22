@@ -20,6 +20,7 @@ return {
 				"zls",
 				"codespell",
 				"templ",
+				"helm-ls",
 			})
 		end,
 	},
@@ -43,31 +44,6 @@ return {
 			}
 		end,
 	},
-	-- {
-	--
-	-- 		nvim_lsp = require("lspconfig")
-	-- 		nvim_lsp.htmx.setup({
-	-- 			filetypes = function(filetypes)
-	-- 				vim.list_extend(filetypes, {
-	-- 					"templ",
-	-- 				})
-	-- 			end,
-	-- 		})
-	-- 		nvim_lsp.tailwindcss.setup({
-	-- 			filetypes = function(filetypes)
-	-- 				vim.list_extend(filetypes, {
-	-- 					"templ",
-	-- 				})
-	-- 			end,
-	-- 		})
-	-- 		nvim_lsp.cssls.setup({
-	-- 			filetypes = function(filetypes)
-	-- 				vim.list_extend(filetypes, {
-	-- 					"templ",
-	-- 				})
-	-- 			end,
-	-- 		})
-	-- },
 	-- lsp servers
 	{
 		"neovim/nvim-lspconfig",
