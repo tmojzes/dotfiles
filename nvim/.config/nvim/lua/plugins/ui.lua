@@ -44,4 +44,13 @@ return {
 			},
 		},
 	},
+	{
+		"Bekaboo/dropbar.nvim",
+		dependencies = {
+			-- optional, but required for fuzzy finder support
+			"nvim-telescope/telescope-fzf-native.nvim",
+			-- optional, but required if you want to see icons for different filetypes
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
 }
