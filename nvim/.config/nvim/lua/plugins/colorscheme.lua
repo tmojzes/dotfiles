@@ -20,4 +20,35 @@ return {
 			})
 		end,
 	},
+	{
+		"Mofiqul/adwaita.nvim",
+		lazy = false,
+		priority = 1000,
+		-- configure and set on startup
+		config = function()
+			vim.g.adwaita_darker = true -- for darker version
+			vim.g.adwaita_disable_cursorline = false -- to disable cursorline
+			vim.g.adwaita_transparent = true -- makes the background transparent
+		end,
+	},
+	{
+		"rebelot/kanagawa.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("kanagawa").setup({
+				-- Put the settings here
+			})
+		end,
+	},
+	{
+		"Mofiqul/vscode.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("vscode").setup({
+				-- Put the settings here
+			})
+		end,
+	},
 }
