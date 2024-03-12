@@ -3,6 +3,9 @@
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
 # Read `man 5 sway` for a complete reference.
+# For later
+
+
 
 ### Variables
 #
@@ -86,7 +89,7 @@ bindswitch --reload --locked lid:off output $laptop enable
     # Start a terminal
     bindsym $mod+Return exec alacritty
 
-    # Start neovim in terninal
+    # Start neovim in terminal
     bindsym $mod+n exec alacritty -e nvim
 
     # Kill focused window
@@ -283,4 +286,8 @@ seat * hide_cursor when-typing enable
 # enabling gui apps to run as root when required.
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-include /etc/sway/config.d/*
+# Toggle notification bar
+set $toggle_notification "swaync-client -t -sw"
+bindsym $mod+Shift+n exec $toggle_notification
+
+include ~/.config/sway/config.d/*
