@@ -21,6 +21,7 @@ return {
 				"codespell",
 				"templ",
 				"helm-ls",
+				"bash-language-server",
 			})
 		end,
 	},
