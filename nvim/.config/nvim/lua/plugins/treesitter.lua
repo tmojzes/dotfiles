@@ -27,6 +27,7 @@ return {
 				"java",
 				"css",
 				"sql",
+                "nix",
 			},
 		},
 	},

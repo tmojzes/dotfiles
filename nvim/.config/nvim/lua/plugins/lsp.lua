@@ -22,6 +22,7 @@ return {
 				"templ",
 				"helm-ls",
 				"bash-language-server",
+                "rnix-lsp",
 			})
 		end,
 	},
