@@ -22,7 +22,8 @@ alias upgrade="sudo apt update && sudo apt upgrade -y && flatpak update -y && su
 # Set exports
 export EDITOR="nvim"
 export VISUAL="nvim"
-export PATH=$PATH:$HOME/go/bin:$HOME/.local/bin:$HOME/.cargo/bin
+export FLYCTL_INSTALL="/home/tmojzes/.fly"
+export PATH=$PATH:$HOME/go/bin:$HOME/.local/bin:$HOME/.cargo/bin:$FLYCTL_INSTALL/bin
 export XDG_DATA_DIRS=$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share/
@@ -39,7 +40,6 @@ source <(k3d completion bash)
 source <(clusterctl completion bash)
 source <(helm completion bash)
 complete -C /home/tmojzes/go/bin/gocomplete go
-eval "$(scw autocomplete script shell=bash)"
 
 # Set vi mode
 set -o vi
