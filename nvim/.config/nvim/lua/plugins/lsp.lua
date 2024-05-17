@@ -22,7 +22,8 @@ return {
 				"templ",
 				"helm-ls",
 				"bash-language-server",
-                "rnix-lsp",
+				"rnix-lsp",
+				"robotframework-lsp",
 			})
 		end,
 	},
