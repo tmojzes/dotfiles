@@ -27,6 +27,12 @@ return {
 			})
 		end,
 	},
+	{
+		"nvim-lspconfig",
+		opts = {
+			inlay_hints = { enabled = false },
+		},
+	},
 
 	-- the opts function can also be used to change the default opts:
 	{
