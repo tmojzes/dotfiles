@@ -3,6 +3,7 @@
 -- Add any additional options here
 vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 4 -- the number of spaces inserted for a tab
+vim.opt.colorcolumn = "110" -- sets a vertical line length marker
 
 -- Add templ file extension to support go templ.
 vim.filetype.add({
