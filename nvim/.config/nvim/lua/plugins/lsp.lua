@@ -27,12 +27,6 @@ return {
 			})
 		end,
 	},
-	{
-		"nvim-lspconfig",
-		opts = {
-			inlay_hints = { enabled = false },
-		},
-	},
 
 	-- the opts function can also be used to change the default opts:
 	{
@@ -53,10 +47,16 @@ return {
 			}
 		end,
 	},
+
 	-- lsp servers
 	{
 		"neovim/nvim-lspconfig",
+		config = function()
+			local lspconfig = require("lspconfig")
+			lspconfig.sourcekit.setup({})
+		end,
 		opts = {
+			inlay_hints = { enabled = false },
 			servers = {
 				cssls = {
 					filetypes = { "css", "scss", "less" },
