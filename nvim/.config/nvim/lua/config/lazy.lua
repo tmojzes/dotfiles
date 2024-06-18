@@ -20,7 +20,6 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.lang.terraform" },
 		{ import = "lazyvim.plugins.extras.lang.yaml" },
 		{ import = "lazyvim.plugins.extras.lang.markdown" },
-		{ import = "lazyvim.plugins.extras.lsp.none-ls" },
 		-- LazyVim yanky extra for better clipboard support
 		{ import = "lazyvim.plugins.extras.coding.yanky" },
 		-- LazyVim Debug Adapter protocol extra for better debugging support

@@ -37,21 +37,10 @@ return {
 		end,
 	},
 
-	-- or you can return new options to override all the defaults
-	{
-		"nvim-lualine/lualine.nvim",
-		event = "VeryLazy",
-		opts = function()
-			return {
-				--[[add your custom lualine config here]]
-			}
-		end,
-	},
-
 	-- lsp servers
 	{
 		"neovim/nvim-lspconfig",
-        --FIXME: LSP does not work if sourcekit is not installed.
+		--FIXME: LSP does not work if sourcekit is not installed.
 		-- config = function()
 		-- 	local lspconfig = require("lspconfig")
 		-- 	lspconfig.sourcekit.setup({})
