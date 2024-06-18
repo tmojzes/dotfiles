@@ -51,10 +51,11 @@ return {
 	-- lsp servers
 	{
 		"neovim/nvim-lspconfig",
-		config = function()
-			local lspconfig = require("lspconfig")
-			lspconfig.sourcekit.setup({})
-		end,
+        --FIXME: LSP does not work if sourcekit is not installed.
+		-- config = function()
+		-- 	local lspconfig = require("lspconfig")
+		-- 	lspconfig.sourcekit.setup({})
+		-- end,
 		opts = {
 			inlay_hints = { enabled = false },
 			servers = {
