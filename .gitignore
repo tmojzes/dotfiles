@@ -12,3 +12,4 @@ lazyvim.json
 # Lazygit specific files
 lazygit/.config/lazygit
 zig*
+bash/.local/share
