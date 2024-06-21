@@ -66,7 +66,7 @@ output * bg $HOME/Pictures/kame_house.png fill
    }
 
    input type:keyboard {
-	xkb_layout hu
+	xkb_layout us
    }
 
 # Gaps config:
