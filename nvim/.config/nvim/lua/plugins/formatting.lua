@@ -10,7 +10,7 @@ return {
 			formatters_by_ft = {
 				python = { "isort", "black" },
 				lua = { "stylua" },
-				go = { "gofmt", "goimports", "golines" },
+				go = { "gofumpt", "goimports", "golines" },
 				sh = { "shfmt" },
 			},
 		},
