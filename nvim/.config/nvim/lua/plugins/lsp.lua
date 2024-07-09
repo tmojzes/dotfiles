@@ -14,7 +14,6 @@ return {
 				"html-lsp",
 				"htmx-lsp",
 				"gopls",
-				"golangci-lint",
 				"gofumpt",
 				"goimports",
 				"zls",
@@ -24,6 +23,7 @@ return {
 				"bash-language-server",
 				"rnix-lsp",
 				"robotframework-lsp",
+				"staticcheck",
 			})
 		end,
 	},
