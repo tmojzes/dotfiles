@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-	. /etc/bash_completion
+    . /etc/bash_completion
 fi
 
 # Set aliases
@@ -31,6 +31,12 @@ export GOBIN="$HOME/go/bin/"
 
 # export SOPS_AGE_KEY_FILE=$HOME/.local/share/sops/key
 
+# Enables homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Enables starship.
+eval "$(starship init bash)"
+
 # Completions
 source <(talosctl completion bash)
 source <(kubectl completion bash)
@@ -43,5 +49,3 @@ complete -C /home/tmojzes/go/bin/gocomplete go
 
 # Set vi mode
 set -o vi
-
-eval "$(starship init bash)"
