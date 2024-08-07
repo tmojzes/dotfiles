@@ -24,6 +24,8 @@ return {
 				"rnix-lsp",
 				"robotframework-lsp",
 				"staticcheck",
+				"buf-language-server",
+				"buf",
 			})
 		end,
 	},

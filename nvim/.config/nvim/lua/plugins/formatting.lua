@@ -12,6 +12,7 @@ return {
 				lua = { "stylua" },
 				go = { "gofumpt", "goimports", "golines" },
 				sh = { "shfmt" },
+				proto = { "buf" },
 			},
 		},
 	},
