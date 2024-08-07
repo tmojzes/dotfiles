@@ -54,6 +54,14 @@ return {
 				htmx = {
 					filetypes = { "html", "templ" },
 				},
+				gopls = {
+					settings = {
+						gopls = {
+							-- Sets go build tags, so gopls loads packges behind these build tags as well.
+							buildFlags = { "-tags=integration global" },
+						},
+					},
+				},
 				tailwindcss = {
 					root_dir = function(...)
 						return require("lspconfig.util").root_pattern(".git")(...)
