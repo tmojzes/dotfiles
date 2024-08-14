@@ -13,3 +13,5 @@ lazyvim.json
 lazygit/.config/lazygit
 zig*
 bash/.local/share
+# tmux plugins folder
+tmux/.config/tmux/plugins
