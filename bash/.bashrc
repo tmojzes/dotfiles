@@ -31,9 +31,6 @@ export GOBIN="$HOME/go/bin/"
 
 # export SOPS_AGE_KEY_FILE=$HOME/.local/share/sops/key
 
-# Enables homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
 # Enables starship.
 eval "$(starship init bash)"
 
