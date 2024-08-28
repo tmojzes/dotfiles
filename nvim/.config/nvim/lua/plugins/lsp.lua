@@ -26,6 +26,7 @@ return {
 				"staticcheck",
 				"buf-language-server",
 				"buf",
+				"ols",
 			})
 		end,
 	},
