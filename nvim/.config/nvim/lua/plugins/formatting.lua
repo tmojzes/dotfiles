@@ -6,6 +6,9 @@ return {
 				golines = {
 					prepend_args = { "-m", "110" },
 				},
+				black = {
+					prepend_args = { "--line-length", "110" },
+				},
 			},
 			formatters_by_ft = {
 				python = { "isort", "black" },
