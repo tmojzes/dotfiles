@@ -62,4 +62,4 @@ require("lazy").setup({
 })
 
 -- Set colorscheme
-vim.cmd("colorscheme catppuccin-mocha")
+vim.cmd("colorscheme adwaita")
