@@ -28,6 +28,8 @@ return {
 				"buf",
 				"ols",
 				"starlark-rust",
+				"clang-format",
+				"clangd",
 			})
 		end,
 	},
