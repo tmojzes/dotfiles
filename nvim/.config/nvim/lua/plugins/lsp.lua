@@ -27,6 +27,7 @@ return {
 				"buf-language-server",
 				"buf",
 				"ols",
+				"starlark-rust",
 			})
 		end,
 	},
