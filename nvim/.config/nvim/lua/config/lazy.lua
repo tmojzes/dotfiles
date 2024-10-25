@@ -62,4 +62,4 @@ require("lazy").setup({
 })
 
 -- Set colorscheme
-vim.cmd("colorscheme adwaita")
+vim.cmd("colorscheme gruvbox-baby")
