@@ -9,6 +9,7 @@ return {
 				black = {
 					prepend_args = { "--line-length", "110" },
 				},
+				xmlstarlet = { "fo" },
 			},
 			formatters_by_ft = {
 				python = { "isort", "black" },
@@ -19,6 +20,7 @@ return {
 				c = { "clang-format" },
 				cpp = { "clang-format" },
 				cc = { "clang-format" },
+				xml = { "xmlstarlet" },
 			},
 		},
 	},

@@ -29,6 +29,7 @@ return {
 				"sql",
 				"nix",
 				"robot",
+				"xml",
 			},
 		},
 	},
