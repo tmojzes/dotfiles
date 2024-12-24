@@ -35,3 +35,7 @@ fi
 if command -v go &>/dev/null; then
     complete -C /home/tmojzes/go/bin/gocomplete go
 fi
+
+if command -v rustup &>/dev/null; then
+    source <(rustup completions bash)
+fi
