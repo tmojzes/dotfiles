@@ -30,6 +30,7 @@ return {
 				"starlark-rust",
 				"clang-format",
 				"clangd",
+				"rust-analyzer",
 			})
 		end,
 	},
