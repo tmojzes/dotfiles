@@ -64,7 +64,7 @@ return {
 				gopls = {
 					settings = {
 						gopls = {
-							-- Sets go build tags, so gopls loads packges behind these build tags as well.
+							-- Sets go build tags, so gopls loads packages behind these build tags as well.
 							buildFlags = { "-tags=integration global" },
 						},
 					},
