@@ -1,4 +1,9 @@
-import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+[general]
+live_config_reload = true
+working_directory = "None"
+import = ["~/.config/alacritty/gruvbox-dark.toml"]
+
+[terminal]
 
 [colors]
 draw_bold_text_with_bright_colors = true
@@ -6,24 +11,39 @@ draw_bold_text_with_bright_colors = true
 [env]
 TERM = "xterm-256color"
 
+[window]
+dynamic_padding = true
+decorations = "full"
+title = "Alacritty"
+opacity = 1
+decorations_theme_variant = "Dark"
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.padding]
+x = 10
+y = 10
+
 [font]
 size = 12
 
+[font.normal]
+family = "monospace"
+style = "Regular"
+
 [font.bold]
-family = "JetBrainsMono Nerd Font"
+family = "monospace"
 style = "Bold"
 
-[font.bold_italic]
-family = "JetBrainsMono Nerd Font"
-style = "Bold Italic"
-
 [font.italic]
-family = "JetBrainsMono Nerd Font"
+family = "monospace"
 style = "Italic"
 
-[font.normal]
-family = "JetBrainsMono Nerd Font"
-style = "Regular"
+[font.bold_italic]
+family = "monospace"
+style = "Bold Italic"
 
 [[keyboard.bindings]]
 action = "SpawnNewInstance"
@@ -37,16 +57,6 @@ multiplier = 3
 [selection]
 save_to_clipboard = false
 
-[shell]
+[terminal.shell]
 program = "/usr/bin/bash"
 
-[window]
-opacity = 1
-
-[window.class]
-general = "Alacritty"
-instance = "Alacritty"
-
-[window.padding]
-x = 10
-y = 10
