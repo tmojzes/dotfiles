@@ -32,8 +32,8 @@ if command -v helm &>/dev/null; then
     source <(helm completion bash)
 fi
 
-if command -v go &>/dev/null; then
-    complete -C /home/tmojzes/go/bin/gocomplete go
+if command -v gocomplete &>/dev/null; then
+    complete -C "$HOME/go/bin/gocomplete" go
 fi
 
 if command -v rustup &>/dev/null; then
