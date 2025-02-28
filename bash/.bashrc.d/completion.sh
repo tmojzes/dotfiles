@@ -39,3 +39,7 @@ fi
 if command -v rustup &>/dev/null; then
     source <(rustup completions bash)
 fi
+
+if command -v tailscale &>/dev/null; then
+    source <(tailscale completion bash)
+fi
