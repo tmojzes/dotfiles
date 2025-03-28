@@ -52,8 +52,9 @@ return {
 		end,
 	},
 	{
-		"luisiacc/gruvbox-baby",
-		lazy = false,
+		"ellisonleao/gruvbox.nvim",
 		priority = 1000,
+		config = true,
+		opts = ...,
 	},
 }
