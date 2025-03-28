@@ -33,19 +33,19 @@ y = 10
 size = 12
 
 [font.normal]
-family = "monospace"
+family = "terminal-font"
 style = "Regular"
 
 [font.bold]
-family = "monospace"
+family = "terminal-font"
 style = "Bold"
 
 [font.italic]
-family = "monospace"
+family = "terminal-font"
 style = "Italic"
 
 [font.bold_italic]
-family = "monospace"
+family = "terminal-font"
 style = "Bold Italic"
 
 [scrolling]
@@ -57,4 +57,3 @@ save_to_clipboard = false
 
 [terminal.shell]
 program = "/usr/bin/bash"
-
