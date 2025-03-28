@@ -1,7 +1,10 @@
 [general]
 live_config_reload = true
 working_directory = "None"
-import = ["~/.config/alacritty/gruvbox-dark.toml"]
+import = [
+    "~/.config/alacritty/gruvbox-dark.toml",
+    "~/.config/alacritty/key-bindings.toml",
+]
 
 [terminal]
 
@@ -44,11 +47,6 @@ style = "Italic"
 [font.bold_italic]
 family = "monospace"
 style = "Bold Italic"
-
-[[keyboard.bindings]]
-action = "SpawnNewInstance"
-key = "Return"
-mods = "Super|Shift"
 
 [scrolling]
 history = 10000
