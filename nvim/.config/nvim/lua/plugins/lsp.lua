@@ -30,6 +30,7 @@ return {
 				"clang-format",
 				"clangd",
 				"rust-analyzer",
+				"elixir-ls",
 			})
 		end,
 	},
