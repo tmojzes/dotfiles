@@ -14,6 +14,6 @@ done
 
 all_packages=("${all_packages[@]/"$del"/}")
 
-printf "%s\n" "${all_packages[@]}" >${root_folder}/programs/.local/cachy_packages.list
+printf "%s\n" "${all_packages[@]}" >${root_folder}/programs/.local/cachy-packages.list
 
-cat ${root_folder}/programs/.local/cachy_packages.list
+cat ${root_folder}/programs/.local/cachy-packages.list
