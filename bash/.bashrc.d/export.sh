@@ -9,6 +9,7 @@ export XDG_RUNTIME_DIR=/run/user/$(id -u)
 export WAYLAND_DISPLAY=wayland-0
 export GOBIN="$HOME/go/bin/"
 export ODIN_BIN="$HOME/projects/oss/Odin/"
+export BUN_BIN="/home/tmojzes/.bun/bin"
 
-export PATH=$PATH:$HOME/go/bin:$HOME/.local/bin:$HOME/.cargo/bin:$FLYCTL_INSTALL/bin:$ODIN_BIN
+export PATH=$PATH:$HOME/go/bin:$HOME/.local/bin:$HOME/.cargo/bin:$FLYCTL_INSTALL/bin:$ODIN_BIN:$BUN_BIN
 # export SOPS_AGE_KEY_FILE=$HOME/.local/share/sops/key
