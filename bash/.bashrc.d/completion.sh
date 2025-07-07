@@ -1,8 +1,3 @@
-# Enables starship.
-if command -v starship &>/dev/null; then
-    eval "$(starship init bash)"
-fi
-
 # Completions
 if command -v talosctl &>/dev/null; then
     source <(talosctl completion bash)
