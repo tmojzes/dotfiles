@@ -1,49 +1,30 @@
-# Use modern completion system
-autoload -Uz compinit
-compinit
+#
+# ~/.bashrc
+#
 
-autoload -Uz promptinit
-promptinit
-prompt adam1
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
-# Keep 10000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=10000
-SAVEHIST=10000
-HISTFILE=~/.zsh_history
+# Source global definitions
+if [ -f /etc/zshrc ]; then
+    . /etc/zshrc
+fi
 
-## Custom path config
-# GOPATH for microservices testing
-# export GOPATH=/home/tmojzes/Projects/microservice/testing_ms
-ZIG_PATH="/usr/local/zig"
-DOOM_EMACS_PATH="$HOME/.config/emacs/bin"
-export PATH=$PATH:/usr/local/go/bin:$HOME/.cargo/bin:"${KREW_ROOT:-$HOME/.krew}/bin":$ZIG_PATH:$DOOM_EMACS_PATH
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
 
-# Go env variables
-export GONOPROXY="gitlabe2.ext.net.nokia.com"
-export GONOSUMDB="gitlabe2.ext.net.nokia.com"
-export GOPRIVATE="gitlabe2.ext.net.nokia.com"
-export GO111MODULE="on"
+# User specific aliases and functions
+if [ -d ~/.zshrc.d ]; then
+    for rc in ~/.zshrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc
 
-# Completions
-source <(talosctl completion zsh)
-source <(kubectl completion zsh)
-source <(operator-sdk completion zsh)
-source <(kubectl krew completion zsh)
-source <(k3d completion zsh)
-source <(clusterctl completion zsh)
-source <(helm completion zsh)
-
-# Aliases
-alias sopse="sops --encrypt --age $(cat $SOPS_AGE_KEY_FILE | grep -oP 'public key: \K(.*)') -i"
-alias sopsd="sops --decrypt --age $(cat $SOPS_AGE_KEY_FILE | grep -oP 'public key: \K(.*)') -i"
-alias upgrade="sudo apt update && sudo apt upgrade -y && flatpak update -y && go-global-update"
-alias emacs="emacsclient -c -a 'emacs'"
-
-
-bindkey -v
-export EDITOR="lvim"
-export SOPS_AGE_KEY_FILE=$HOME/.sops/key
-
-eval "$(starship init zsh)"
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /home/tmojzes/go/bin/gocomplete go
+# Set vi mode
+set -o vi
