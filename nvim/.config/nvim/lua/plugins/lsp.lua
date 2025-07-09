@@ -31,6 +31,9 @@ return {
 				"clangd",
 				"rust-analyzer",
 				"elixir-ls",
+				"ansible-language-server",
+				"ansible-lint",
+				"jinja-lsp",
 			})
 		end,
 	},
