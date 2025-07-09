@@ -11,6 +11,6 @@ export GOBIN="$HOME/go/bin/"
 export ODIN_BIN="$HOME/projects/oss/Odin/"
 export BUN_BIN="/home/tmojzes/.bun/bin"
 export CARGO_BIN=".rustup/toolchains/stable-aarch64-apple-darwin/bin"
+export RANCHER_BIN="/Users/tmojzes/.rd/bin"
 
-export PATH=$PATH:$HOME/go/bin:$HOME/.local/bin:$HOME/$CARGO_BIN:$FLYCTL_INSTALL/bin:$ODIN_BIN:$BUN_BIN
-# export SOPS_AGE_KEY_FILE=$HOME/.local/share/sops/key
+export PATH=$PATH:$HOME/go/bin:$HOME/.local/bin:$HOME/$CARGO_BIN:$FLYCTL_INSTALL/bin:$ODIN_BIN:$BUN_BIN:$RANCHER_BIN

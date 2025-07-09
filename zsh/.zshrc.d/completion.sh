@@ -41,3 +41,7 @@ fi
 if command -v tailscale &>/dev/null; then
     source <(tailscale completion zsh)
 fi
+
+if command -v ibmcloud &>/dev/null; then
+    source /usr/local/ibmcloud/autocomplete/zsh_autocomplete
+fi
