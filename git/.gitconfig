@@ -1,6 +1,7 @@
 [user]
     name = Tamás Mojzes
-    email = tmojzi96@gmail.com
+    email = tamas.mojzes@ibm.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEXaQVDPMxPTY9gaee3r4+lTP+W7ZqhtqdRz8kH4NRUe
 
 [alias]
    l = log --graph --oneline --decorate
@@ -19,3 +20,14 @@
         colorMoved = zebra
 [init]
         defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
