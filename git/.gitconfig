@@ -1,6 +1,6 @@
 [user]
     name = Tamás Mojzes
-    email = tamas.mojzes@ibm.com
+	email = Tamas.Mojzes@ibm.com
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEXaQVDPMxPTY9gaee3r4+lTP+W7ZqhtqdRz8kH4NRUe
 
 [alias]
