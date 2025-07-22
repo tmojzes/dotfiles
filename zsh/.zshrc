@@ -29,3 +29,4 @@ unset rc
 # Set vi mode
 set -o vi
 bindkey -v '^?' backward-delete-char
+bindkey -v '^R' history-incremental-search-backward
