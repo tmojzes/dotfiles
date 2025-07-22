@@ -1,7 +1,3 @@
-#
-# ~/.bashrc
-#
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -25,8 +21,3 @@ if [ -d ~/.zshrc.d ]; then
     done
 fi
 unset rc
-
-# Set vi mode
-set -o vi
-bindkey -v '^?' backward-delete-char
-bindkey -v '^R' history-incremental-search-backward
