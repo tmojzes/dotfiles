@@ -34,6 +34,7 @@ return {
 				"ansible-language-server",
 				"ansible-lint",
 				"jinja-lsp",
+				"kdlfmt",
 			})
 		end,
 	},

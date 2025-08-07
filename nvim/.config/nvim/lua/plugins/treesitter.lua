@@ -30,6 +30,7 @@ return {
 				"nix",
 				"robot",
 				"xml",
+				"kdl",
 			},
 		},
 	},
