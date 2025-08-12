@@ -10,9 +10,9 @@ setopt hist_ignore_all_dups
 # Zsh history related configs
 bindkey -v '^R' history-incremental-search-backward # Set ctrl + r for search in zsh history
 
-HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
 export SAVEHIST=$HISTSIZE
+export HISTFILE="$HOME/.zsh_history"
 setopt BANG_HIST              # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY       # Write the history file in the ":start:elapsed;command" format.
 setopt INC_APPEND_HISTORY     # Write to the history file immediately, not when the shell exits.
