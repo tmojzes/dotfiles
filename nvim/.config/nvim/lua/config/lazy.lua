@@ -35,6 +35,8 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.editor.mini-move" },
 		-- LazyVim ui extras
 		{ import = "lazyvim.plugins.extras.ui.treesitter-context" },
+		-- LazyVim util extras
+		{ import = "lazyvim.plugins.extras.util.octo" },
 		-- import/override with your plugins
 		{ import = "plugins" },
 	},
