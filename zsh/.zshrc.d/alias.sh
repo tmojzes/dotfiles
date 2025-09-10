@@ -5,3 +5,4 @@ alias grep='grep --color=auto'
 alias vim="nvim"
 alias ic="ibmcloud"
 alias k="kubectl"
+alias rgf="rg --files | rg "$1""
