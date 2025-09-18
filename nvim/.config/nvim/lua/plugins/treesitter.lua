@@ -24,7 +24,6 @@ return {
 				"http",
 				"rust",
 				"gitignore",
-				"java",
 				"css",
 				"sql",
 				"nix",
