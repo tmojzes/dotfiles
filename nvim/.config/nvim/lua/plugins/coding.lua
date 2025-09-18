@@ -9,6 +9,7 @@ return {
 		keys = function()
 			return {}
 		end,
+		run = "make install_jsregexp",
 	},
 	-- then: setup supertab in cmp
 	{
