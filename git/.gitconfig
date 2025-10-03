@@ -1,35 +1,8 @@
-[user]
-    name = Tamás Mojzes
-	email = Tamas.Mojzes@ibm.com
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEXaQVDPMxPTY9gaee3r4+lTP+W7ZqhtqdRz8kH4NRUe
+[include]
+    path = ~/.gitconfig_base
 
-[alias]
-   l = log --graph --oneline --decorate
-   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
-   ll = log --graph --oneline --decorate --branches --tags
-   lll = log --graph --oneline --decorate --all
-[url "git@github.com:"]
-        insteadOf = https://github.com/
-[url "git@github.ibm.com:"]
-    insteadOf = https://github.ibm.com/
-[pull]
-        rebase = true
-[fetch]
-        prune = true
-[color]
-        ui = auto
-[diff]
-        colorMoved = zebra
-[init]
-        defaultBranch = main
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[gpg]
-	format = ssh
-[gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-[commit]
-	gpgsign = true
+[includeIf "gitdir:~/projects/ibm/"]
+    path = ~/.gitconfig_ibm
+
+[includeIf "gitdir:~/projects/personal/"]
+    path = ~/.gitconfig_home
