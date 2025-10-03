@@ -35,6 +35,7 @@ return {
 				"ansible-lint",
 				"jinja-lsp",
 				"kdlfmt",
+				"ruff",
 			})
 		end,
 	},

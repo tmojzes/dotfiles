@@ -6,7 +6,7 @@ return {
 				golines = {
 					prepend_args = { "-m", "110" },
 				},
-				black = {
+				ruff_format = {
 					prepend_args = { "--line-length", "110" },
 				},
 				xmlstarlet = { "fo" },
