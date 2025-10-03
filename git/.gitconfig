@@ -3,6 +3,3 @@
 
 [includeIf "gitdir:~/projects/ibm/"]
     path = ~/.gitconfig_ibm
-
-[includeIf "gitdir:~/projects/personal/"]
-    path = ~/.gitconfig_home
