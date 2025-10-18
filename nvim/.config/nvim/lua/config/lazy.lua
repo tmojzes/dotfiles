@@ -21,9 +21,7 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.lang.yaml" },
 		{ import = "lazyvim.plugins.extras.lang.helm" },
 		{ import = "lazyvim.plugins.extras.lang.markdown" },
-		{ import = "lazyvim.plugins.extras.lang.elixir" },
 		{ import = "lazyvim.plugins.extras.lang.typescript" },
-		{ import = "lazyvim.plugins.extras.lang.angular" },
 		-- LazyVim yanky extra for better clipboard support
 		{ import = "lazyvim.plugins.extras.coding.yanky" },
 		-- LazyVim Debug Adapter protocol extra for better debugging support
@@ -37,8 +35,6 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.editor.mini-move" },
 		-- LazyVim ui extras
 		{ import = "lazyvim.plugins.extras.ui.treesitter-context" },
-		-- LazyVim util extras
-		{ import = "lazyvim.plugins.extras.util.octo" },
 		-- import/override with your plugins
 		{ import = "plugins" },
 	},
