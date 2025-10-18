@@ -23,6 +23,8 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.lang.markdown" },
 		{ import = "lazyvim.plugins.extras.lang.typescript" },
 		{ import = "lazyvim.plugins.extras.lang.astro" },
+		-- LazyVim formatter extras
+		{ import = "lazyvim.plugins.extras.formatting.prettier" },
 		-- LazyVim yanky extra for better clipboard support
 		{ import = "lazyvim.plugins.extras.coding.yanky" },
 		-- LazyVim Debug Adapter protocol extra for better debugging support
