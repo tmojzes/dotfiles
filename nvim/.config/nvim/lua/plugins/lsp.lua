@@ -29,6 +29,9 @@ return {
 				"ansible-lint",
 				"jinja-lsp",
 				"ruff",
+				"cue",
+				"cueimports",
+				"cuelsp",
 			})
 		end,
 	},
