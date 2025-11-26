@@ -27,6 +27,7 @@ return {
 				"css",
 				"sql",
 				"xml",
+				"cue",
 			},
 		},
 	},
