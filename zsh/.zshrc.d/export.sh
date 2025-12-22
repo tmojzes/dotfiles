@@ -8,10 +8,11 @@ export XDG_DATA_HOME=$HOME/.local/share/
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 export WAYLAND_DISPLAY=wayland-0
 export GOBIN="$HOME/go/bin/"
+export GO_INSTALL_PATH="/usr/local/go/bin"
 export ODIN_BIN="$HOME/projects/oss/Odin/"
 export BUN_BIN="/home/tmojzes/.bun/bin"
 export CARGO_BIN="$HOME/.rustup/toolchains/stable-aarch64-apple-darwin/bin"
 export RUST_BIN="$HOME/.cargo/bin"
 export RANCHER_BIN="/Users/tmojzes/.rd/bin"
 
-export PATH=$PATH:$GOBIN:$HOME/.local/bin:$CARGO_BIN:$FLYCTL_INSTALL/bin:$ODIN_BIN:$BUN_BIN:$RANCHER_BIN:$RUST_BIN
+export PATH=$PATH:$GOBIN:$HOME/.local/bin:$CARGO_BIN:$FLYCTL_INSTALL/bin:$ODIN_BIN:$BUN_BIN:$RANCHER_BIN:$RUST_BIN:$GO_INSTALL_PATH
