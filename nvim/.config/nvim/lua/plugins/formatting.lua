@@ -7,12 +7,12 @@ return {
 					prepend_args = { "-m", "110" },
 				},
 				ruff_format = {
-					prepend_args = { "--line-length", "110" },
+					prepend_args = { "format --line-length", "110" },
 				},
 				xmlstarlet = { "fo" },
 			},
 			formatters_by_ft = {
-				python = { "isort", "black" },
+				python = { "isort", "ruff_format" },
 				lua = { "stylua" },
 				go = { "gofumpt", "goimports", "golines" },
 				sh = { "shfmt" },
