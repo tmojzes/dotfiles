@@ -14,7 +14,7 @@ return {
 			formatters_by_ft = {
 				python = { "isort", "ruff_format" },
 				lua = { "stylua" },
-				go = { "gofumpt", "goimports", "golines" },
+				go = { "gofumpt", "goimports" },
 				sh = { "shfmt" },
 				proto = { "buf" },
 				c = { "clang-format" },
