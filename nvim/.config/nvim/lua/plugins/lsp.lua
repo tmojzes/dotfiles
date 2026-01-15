@@ -31,6 +31,8 @@ return {
 				"ruff",
 				"cueimports",
 				"cue",
+				"ty",
+				"tofu-ls",
 			})
 		end,
 	},
