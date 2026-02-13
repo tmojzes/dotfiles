@@ -16,5 +16,6 @@
     "instructions": [
         "Always use the project's current directory as context.",
         "Be concise and prioritize code quality."
-    ]
+    ],
+    "theme": "gruvbox"
 }
