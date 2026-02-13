@@ -38,3 +38,7 @@ fi
 if command -v tailscale &>/dev/null; then
     source <(tailscale completion bash)
 fi
+
+if command -v minikube &>/dev/null; then
+    source <(minikube completion bash)
+fi
