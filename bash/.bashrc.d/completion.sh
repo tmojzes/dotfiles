@@ -42,3 +42,7 @@ fi
 if command -v minikube &>/dev/null; then
     source <(minikube completion bash)
 fi
+
+if command -v ibmcloud &>/dev/null; then
+    source /usr/local/ibmcloud/autocomplete/bash_autocomplete
+fi
