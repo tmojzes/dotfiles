@@ -3,8 +3,14 @@ if command -v starship &>/dev/null; then
     eval "$(starship init bash)"
 fi
 
-# Starts tmux session.
-if command -v tmux &>/dev/null; then
-    # Start tmux session if shell is not running in one already.
-    [[ -z "$TMUX" ]] && exec tmux
+# Ask which tmux session to attach to or create a new session.
+if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
+    echo "Current tmux sessions:"
+    tmux ls
+    read -p "Enter session name to attach, or press enter for new: " session_name
+    if [ -z "$session_name" ]; then
+        tmux new-session
+    else
+        tmux attach-session -t "$session_name"
+    fi
 fi
