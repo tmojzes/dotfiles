@@ -8,3 +8,17 @@ local opts = { noremap = true, silent = true }
 
 -- In visual mode ('x'), map 'p' to 'P' to paste without overwriting the register.
 vim.keymap.set("x", "p", "P", { desc = "Paste without yanking selected text" })
+
+if vim.env.SSH_TTY then
+	vim.g.clipboard = {
+		name = "OSC 52",
+		copy = {
+			["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+			["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+		},
+		paste = {
+			["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+			["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+		},
+	}
+end
