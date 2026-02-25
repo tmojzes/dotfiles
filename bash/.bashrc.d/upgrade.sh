@@ -6,8 +6,8 @@ upgrade() {
         sudo apt update && sudo apt upgrade -y
     elif command -v dnf &>/dev/null; then
         sudo dnf upgrade -y
-    elif command -v pacman &>/dev/null; then
-        sudo pacman -Syyu --noconfirm
+    elif command -v paru &>/dev/null; then
+        sudo paru -Syyu --noconfirm
     elif command -v zypper &>/dev/null; then
         sudo zypper update -y
     fi
