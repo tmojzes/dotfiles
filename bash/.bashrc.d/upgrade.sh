@@ -30,5 +30,18 @@ upgrade() {
         go-global-update
     fi
 
+    # Rust update
+    if command -v rustup &>/dev/null; then
+        echo "Updating Rust toolchain..."
+        rustup update
+    fi
+
+    # Update installed crates
+    if command -v cargo &>/dev/null; then
+        echo "Updating Rust crates..."
+        cargo install cargo-update
+        cargo install-update -a
+    fi
+
     echo "--- All updates complete! ---"
 }
