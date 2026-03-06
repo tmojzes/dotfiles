@@ -6,6 +6,7 @@ vim.opt.tabstop = 4 -- the number of spaces inserted for a tab
 vim.opt.colorcolumn = "110" -- sets a vertical line length marker
 vim.opt.number = true
 vim.opt.relativenumber = false
+vim.opt.clipboard = "unnamedplus"
 vim.g.lazyvim_python_ruff = "ruff"
 vim.g.lazyvim_python_lsp = "ruff"
 
