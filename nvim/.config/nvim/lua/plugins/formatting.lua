@@ -4,17 +4,17 @@ return {
 		opts = {
 			formatters = {
 				golines = {
-					prepend_args = { "-m", "110" },
+					prepend_args = { "--base-formatter", "gofumpt", "--max-len", "110" },
 				},
 				ruff_format = {
-					prepend_args = { "format --line-length", "110" },
+					prepend_args = { "--line-length", "110" },
 				},
 				xmlstarlet = { "fo" },
 			},
 			formatters_by_ft = {
 				python = { "isort", "ruff_format" },
 				lua = { "stylua" },
-				go = { "gofumpt", "goimports" },
+				go = { "golines", "goimports" },
 				sh = { "shfmt" },
 				proto = { "buf" },
 				c = { "clang-format" },
