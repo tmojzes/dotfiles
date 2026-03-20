@@ -54,9 +54,6 @@ return {
 				cssls = {
 					filetypes = { "css", "scss", "less" },
 				},
-				htmx = {
-					filetypes = { "html", "templ" },
-				},
 				gopls = {
 					settings = {
 						gopls = {
