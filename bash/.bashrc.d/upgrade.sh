@@ -1,47 +1,56 @@
 upgrade() {
-    echo "--- Starting System Updates ---"
+    # Helpers for colored output
+    print_step() { echo -e "\n\033[1;34m=== $1 ===\033[0m"; }
+    print_title() { echo -e "\n\033[1;32m--- $1 ---\033[0m"; }
 
-    # 1. System Package Manager Detection
+    print_title "Starting System Updates"
+
+    print_step "System Packages"
     if command -v apt &>/dev/null; then
         sudo apt update && sudo apt upgrade -y
     elif command -v dnf &>/dev/null; then
         sudo dnf upgrade -y
     elif command -v paru &>/dev/null; then
-        sudo paru -Syyu --noconfirm
+        paru -Syyu --noconfirm
     elif command -v zypper &>/dev/null; then
         sudo zypper update -y
     fi
 
-    # Snap Updates
-    if command -v snap &>/dev/null; then
-        echo "Updating Snaps..."
-        sudo snap refresh
-    fi
+    # 2. Reusable helper for optional tools
+    update_tool() {
+        local cmd=$1
+        local msg=$2
 
-    # Flatpak Updates
-    if command -v flatpak &>/dev/null; then
-        echo "Updating Flatpaks..."
-        flatpak update -y
-    fi
+        shift 2
+        if command -v "$cmd" &>/dev/null; then
+            print_step "$msg"
+            "$@"
+        fi
+    }
 
-    # Go Global Update
-    if command -v go-global-update &>/dev/null; then
-        echo "Updating Go packages..."
-        go-global-update
-    fi
+    update_tool snap "Updating Snaps" sudo snap refresh
+    update_tool flatpak "Updating Flatpaks" flatpak update -y
+    update_tool go-global-update "Updating Go packages" go-global-update
+    update_tool rustup "Updating Rust toolchain" rustup update
 
-    # Rust update
-    if command -v rustup &>/dev/null; then
-        echo "Updating Rust toolchain..."
-        rustup update
-    fi
-
-    # Update installed crates
     if command -v cargo &>/dev/null; then
-        echo "Updating Rust crates..."
-        cargo install cargo-update
+        print_step "Updating Rust crates"
+        if ! cargo install-update -V &>/dev/null; then
+            cargo install cargo-update
+        fi
         cargo install-update -a
     fi
 
-    echo "--- All updates complete! ---"
+    if command -v ibmcloud &>/dev/null && [ -d "$HOME/ibmcloud_homes" ]; then
+        print_step "Updating IBM Cloud Plugins"
+
+        for ic_home in "$HOME/ibmcloud_homes"/*; do
+            if [ -d "$ic_home" ]; then
+                echo "-> Profile: $(basename "$ic_home")"
+                IBMCLOUD_HOME="$ic_home" ibmcloud plugin update --all
+            fi
+        done
+    fi
+
+    print_title "All updates complete!"
 }
