@@ -15,7 +15,6 @@ return {
 				"gopls",
 				"gofumpt",
 				"goimports",
-				"zls",
 				"codespell",
 				"templ",
 				"helm-ls",
