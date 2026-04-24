@@ -7,6 +7,11 @@ if command -v direnv &>/dev/null; then
     eval "$(direnv hook bash)"
 fi
 
+# Vite+ bin (https://viteplus.dev)
+if [ -d "$HOME/.vite-plus" ]; then
+    . "$HOME/.vite-plus/env"
+fi
+
 # Ask which tmux session to attach to or create a new session.
 if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
     echo "Current tmux sessions:"
