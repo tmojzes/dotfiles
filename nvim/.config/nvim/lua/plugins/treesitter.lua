@@ -28,6 +28,8 @@ return {
 				"sql",
 				"xml",
 				"cue",
+				"oxlint",
+				"oxfmt",
 			},
 		},
 	},

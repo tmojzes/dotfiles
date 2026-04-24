@@ -21,7 +21,7 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.lang.helm" },
 		{ import = "lazyvim.plugins.extras.lang.markdown" },
 		{ import = "lazyvim.plugins.extras.lang.zig" },
-		{ import = "lazyvim.plugins.extras.lang.typescript" },
+		{ import = "lazyvim.plugins.extras.lang.typescript.oxc" },
 		-- LazyVim yanky extra for better clipboard support
 		{ import = "lazyvim.plugins.extras.coding.yanky" },
 		-- LazyVim Debug Adapter protocol extra for better debugging support

@@ -21,6 +21,8 @@ return {
 				cpp = { "clang-format" },
 				cc = { "clang-format" },
 				xml = { "xmlstarlet" },
+				js = { "oxfmt" },
+				ts = { "oxfmt" },
 			},
 		},
 	},
