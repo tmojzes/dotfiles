@@ -8,7 +8,8 @@ export XDG_DATA_HOME=${HOME}/.local/share/
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 export WAYLAND_DISPLAY=$(systemctl --user show-environment | grep '^WAYLAND_DISPLAY=' | cut -d= -f2)
 export GOBIN="${HOME}/go/bin/"
-export ODIN_BIN="${HOME}/projects/oss/Odin/"
-export BUN_BIN="${HOME}/.bun/bin"
 
-export PATH=${PATH}:${HOME}/go/bin:${HOME}/.local/bin:${HOME}/.cargo/bin:${FLYCTL_INSTALL}/bin:${ODIN_BIN}:${BUN_BIN}
+ODIN_BIN="${HOME}/projects/oss/Odin/"
+BUN_BIN="${HOME}/.bun/bin"
+OPENCODE_BIN="${HOME}/.opencode/bin"
+export PATH=${PATH}:${HOME}/go/bin:${HOME}/.local/bin:${HOME}/.cargo/bin:${FLYCTL_INSTALL}/bin:${ODIN_BIN}:${BUN_BIN}:${OPENCODE_BIN}
