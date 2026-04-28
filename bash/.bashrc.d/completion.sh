@@ -46,3 +46,7 @@ fi
 if command -v ibmcloud &>/dev/null; then
     source /usr/local/ibmcloud/autocomplete/bash_autocomplete
 fi
+
+if command -v terraform &>/dev/null; then
+    complete -C /usr/bin/terraform terraform
+fi
