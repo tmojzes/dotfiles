@@ -2,7 +2,7 @@
     name = Tamás Mojzes
 	email = Tamas.Mojzes@ibm.com
 	signingkey = ~/.ssh/id_ed25519.pub
-[url "git@github.ibm.com:"]
+[url "ssh://git@github.ibm.com/"]
     insteadOf = https://github.ibm.com/
 
 [gpg]
