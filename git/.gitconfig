@@ -3,3 +3,5 @@
 
 [includeIf "gitdir/i:~/projects/ibm/"]
     path = ~/.gitconfig_ibm
+[url "git@github.ibm.com:"]
+	insteadOf = https://github.ibm.com/
