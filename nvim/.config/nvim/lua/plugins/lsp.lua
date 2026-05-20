@@ -31,8 +31,6 @@ return {
 				"cue",
 				"ty",
 				"tofu-ls",
-				"clangd",
-				"clang-format",
 			})
 		end,
 	},
