@@ -9,6 +9,9 @@ return {
 				ruff_format = {
 					prepend_args = { "--line-length", "110" },
 				},
+				isort = {
+					prepend_args = { "--line-length", "110" },
+				},
 				xmlstarlet = { "fo" },
 			},
 			formatters_by_ft = {
