@@ -47,6 +47,16 @@ if command -v ibmcloud &>/dev/null; then
     }
     complete -o default -F _bash_autocomplete icad
 
+    ihld() {
+        IBMCLOUD_HOME="$HOME/ibmcloud_homes/hybrid_link_dev" ibmcloud "$@"
+    }
+    complete -o default -F _bash_autocomplete ihld
+
+    ihlp() {
+        IBMCLOUD_HOME="$HOME/ibmcloud_homes/hybrid_link_prod" ibmcloud "$@"
+    }
+    complete -o default -F _bash_autocomplete ihlp
+
 fi
 # alias sopse="sops --encrypt --age $(cat $SOPS_AGE_KEY_FILE | grep -oP 'public key: \K(.*)') -i"
 # alias sopsd="sops --decrypt --age $(cat $SOPS_AGE_KEY_FILE | grep -oP 'public key: \K(.*)') -i"
