@@ -16,6 +16,8 @@ Configs are symlinked at directory level, so tools write generated content into 
 - `nvim/.config/nvim/lazy-lock.json`, `nvim/.config/nvim/lazyvim.json` (lazy.nvim/LazyVim)
 - `tmux/.config/tmux/plugins/` (TPM)
 
+Exception: `nix/.config/home-manager/flake.lock` IS committed on purpose (reproducible package set) — don't gitignore or delete it.
+
 ## Package notes
 
 - **nvim**: LazyVim distro config. Prefer adding a `lazyvim.plugins.extras.*` import in `lua/config/lazy.lua` over hand-written specs in `lua/plugins/` (recent commits migrate toward extras). Lua style: tabs, width 4, 100 columns (`stylua.toml`).
@@ -23,6 +25,7 @@ Configs are symlinked at directory level, so tools write generated content into 
 - **git**: `.gitconfig` always includes `~/.gitconfig_base` and conditionally `~/.gitconfig_ibm` (`includeIf "gitdir/i:~/projects/ibm/"`). Work-specific identity/settings go in `.gitconfig_ibm`, personal in `.gitconfig_base`.
 - **opencode**: the user's *global* opencode config deployed via stow — not repo-local config for working in this repo.
 - **pacman**: contains only `makepkg.conf`.
+- **nix**: home-manager flake (packages-only — dotfiles stay stow-managed). Dev tools (go, nodejs, bun, lazygit, neovim, tmux) live in `home.nix`; rust stays on rustup. Deploy: `stow nix` then `home-manager switch --flake ~/.config/home-manager`. Gotchas: flakes only see git-tracked files, so `git add` new files in this package before switching; `nix.enable = false` because Determinate Nix owns `/etc/nix/nix.conf`; Nix itself self-upgrades via `determinate-nixd` (not in `upgrade.sh`).
 
 ## Known stale/broken
 
