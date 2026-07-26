@@ -5,3 +5,6 @@
     path = ~/.gitconfig_ibm
 [url "git@github.ibm.com:"]
 	insteadOf = https://github.ibm.com/
+[credential "https://github.ibm.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
