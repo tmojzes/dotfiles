@@ -33,6 +33,12 @@ upgrade() {
     update_tool go-global-update "Updating Go packages" go-global-update
     update_tool rustup "Updating Rust toolchain" rustup update
 
+    if command -v home-manager &>/dev/null; then
+        print_step "Updating Nix packages"
+        nix flake update --flake "$HOME/.config/home-manager" &&
+            home-manager switch --flake "$HOME/.config/home-manager"
+    fi
+
     if command -v cargo &>/dev/null; then
         print_step "Updating Rust crates"
         if ! cargo install-update -V &>/dev/null; then
