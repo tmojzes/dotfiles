@@ -12,13 +12,18 @@
   outputs =
     { nixpkgs, home-manager, ... }:
     let
-      system = "aarch64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      mkHome =
+        system: homeDirectory:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          modules = [
+            ./home.nix
+            { home.homeDirectory = homeDirectory; }
+          ];
+        };
     in
     {
-      homeConfigurations."tmojzes" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home.nix ];
-      };
+      homeConfigurations."tmojzes" = mkHome "aarch64-linux" "/home/tmojzes";
+      homeConfigurations."tmojzes-mac" = mkHome "aarch64-darwin" "/Users/tmojzes";
     };
 }

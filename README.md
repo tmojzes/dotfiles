@@ -22,6 +22,27 @@ stow */ # Everything (the '/' ignores the README)
 stow nvim # Just my neovim config
 ```
 
+## Dev environment (Nix)
+
+Dev tools (go, nodejs, bun, lazygit, neovim, ripgrep, tinygo, tmux) are managed by
+home-manager via the `nix` package.
+
+1. Install [Determinate Nix](https://determinate.systems/nix/):
+
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+   ```
+
+2. Stow the config and activate it (Linux uses `tmojzes`, macOS uses `tmojzes-mac`):
+
+   ```bash
+   stow nix
+   nix run home-manager/master -- switch --flake ~/.config/home-manager#tmojzes-mac # macOS
+   nix run home-manager/master -- switch --flake ~/.config/home-manager            # Linux
+   ```
+
+After the first activation, use `home-manager switch` instead of `nix run ...`.
+
 ## Programs
 
 An updated list of all the programs I use can be found in the `programs` directory
