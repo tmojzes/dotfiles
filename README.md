@@ -25,8 +25,8 @@ stow nvim # Just my neovim config
 ## Dev environment (Nix)
 
 Dev tools (languages, editors, linters, git/CLI utilities, AI CLIs, k8s/infra tooling) are
-managed by home-manager via the `nix` package. A few stay on brew on purpose: rustup, pipx,
-poetry, odin, and anything not packaged in nixpkgs.
+managed by home-manager via the `nix` package. Homebrew is only used for casks (GUI apps and
+fonts); no brew formulae are installed.
 
 1. Install [Determinate Nix](https://determinate.systems/nix/):
 

@@ -17,12 +17,13 @@
     tmux
     zellij
 
-    # Languages & runtimes (rust stays on rustup, odin on brew)
+    # Languages & runtimes
     elixir
     go
     nodejs
     bun
     python313
+    rustup
     tinygo
     zig
     luarocks
@@ -57,6 +58,7 @@
     direnv
     fd
     fzf
+    lf
     ripgrep
     tree-sitter
     yq-go
