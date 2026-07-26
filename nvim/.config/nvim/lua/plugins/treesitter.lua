@@ -33,4 +33,13 @@ return {
 			},
 		},
 	},
+	-- {
+	-- 	"smrtrfszm/dataprime.nvim",
+	-- 	dependencies = { "nvim-treesitter/nvim-treesitter" },
+	-- 	-- Optionally:
+	-- 	-- dependencies = {'nvim-treesitter/nvim-treesitter', 'numToStr/Comment.nvim'},
+	-- 	config = function(_, _)
+	-- 		require("dataprime").setup()
+	-- 	end,
+	-- },
 }

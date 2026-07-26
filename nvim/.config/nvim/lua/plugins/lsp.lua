@@ -12,9 +12,6 @@ return {
 				"tailwindcss-language-server",
 				"html-lsp",
 				"css-lsp",
-				"gopls",
-				"gofumpt",
-				"goimports",
 				"codespell",
 				"templ",
 				"helm-ls",
@@ -53,14 +50,14 @@ return {
 				cssls = {
 					filetypes = { "css", "scss", "less" },
 				},
-				gopls = {
-					settings = {
-						gopls = {
-							-- Sets go build tags, so gopls loads packages behind these build tags as well.
-							buildFlags = { "-tags=integration global" },
-						},
-					},
-				},
+				-- gopls = {
+				-- 	settings = {
+				-- 		gopls = {
+				-- 			-- Sets go build tags, so gopls loads packages behind these build tags as well.
+				-- 			buildFlags = { "-tags=integration global" },
+				-- 		},
+				-- 	},
+				-- },
 				tailwindcss = {
 					root_dir = function(...)
 						return require("lspconfig.util").root_pattern(".git")(...)
