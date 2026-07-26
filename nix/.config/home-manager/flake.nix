@@ -15,7 +15,10 @@
       mkHome =
         system: homeDirectory:
         home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "terraform" ];
+          };
           modules = [
             ./home.nix
             { home.homeDirectory = homeDirectory; }

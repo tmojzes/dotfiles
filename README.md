@@ -24,8 +24,9 @@ stow nvim # Just my neovim config
 
 ## Dev environment (Nix)
 
-Dev tools (go, nodejs, bun, lazygit, neovim, ripgrep, tinygo, tmux) are managed by
-home-manager via the `nix` package.
+Dev tools (languages, editors, linters, git/CLI utilities, AI CLIs, k8s/infra tooling) are
+managed by home-manager via the `nix` package. A few stay on brew on purpose: rustup, pipx,
+poetry, odin, and anything not packaged in nixpkgs.
 
 1. Install [Determinate Nix](https://determinate.systems/nix/):
 
