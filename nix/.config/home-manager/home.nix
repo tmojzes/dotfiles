@@ -16,6 +16,7 @@
     bun
     lazygit
     neovim
+    ripgrep
     tinygo
     tmux
   ];
