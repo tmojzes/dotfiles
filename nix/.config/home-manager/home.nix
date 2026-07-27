@@ -10,6 +10,10 @@
 
   programs.home-manager.enable = true;
 
+  # The man page generation triggers a Nix string-context warning in
+  # nixosOptionsDoc ('options.json'). Disable it until upstream is fixed.
+  manual.manpages.enable = false;
+
   home.packages = with pkgs; [
     # Editors & terminal
     helix
