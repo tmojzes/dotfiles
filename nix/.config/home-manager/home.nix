@@ -26,7 +26,7 @@
     go
     nodejs
     bun
-    python313
+    (python313.withPackages (ps: with ps; [ pyyaml ]))
     rustup
     tinygo
     zig
@@ -54,6 +54,7 @@
     pylint
     shellcheck
     yamllint
+    shfmt
 
     # Python tooling (pipx and poetry stay on brew)
     uv
