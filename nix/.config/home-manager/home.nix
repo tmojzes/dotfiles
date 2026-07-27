@@ -103,5 +103,5 @@
 
     # Virtualization
     qemu
-  ] ++ lib.optional (pkgs.system == "aarch64-darwin") vfkit;
+  ] ++ lib.optional (pkgs.stdenv.hostPlatform.system == "aarch64-darwin") vfkit;
 }
