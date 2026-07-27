@@ -3,8 +3,8 @@ if command -v starship &>/dev/null; then
     eval "$(starship init zsh)"
 fi
 
-# Starts tmux session.
-if command -v tmux &>/dev/null; then
+# Starts tmux session (Linux only).
+if command -v tmux &>/dev/null && [[ "$(uname -s)" == "Linux" ]]; then
     # Start tmux session if shell is not running in one already.
     [[ -z "$TMUX" ]] && exec tmux
 fi
