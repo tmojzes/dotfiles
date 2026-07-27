@@ -36,7 +36,11 @@ upgrade() {
     if command -v home-manager &>/dev/null; then
         print_step "Updating Nix packages"
         hm_target="tmojzes"
-        [ "$(uname)" = "Darwin" ] && hm_target="tmojzes-mac"
+        if [ "$(uname)" = "Darwin" ]; then
+            hm_target="tmojzes-mac"
+        elif [ "$(uname -m)" = "x86_64" ]; then
+            hm_target="tmojzes-x86_64-linux"
+        fi
         nix flake update --flake "$HOME/.config/home-manager" &&
             home-manager switch --flake "$HOME/.config/home-manager#$hm_target"
     fi

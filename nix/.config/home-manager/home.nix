@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.username = "tmojzes";
@@ -18,7 +18,7 @@
     zellij
 
     # Languages & runtimes
-    elixir
+    beamPackages.elixir
     go
     nodejs
     bun
@@ -103,6 +103,5 @@
 
     # Virtualization
     qemu
-    vfkit
-  ];
+  ] ++ lib.optional (pkgs.system == "aarch64-darwin") vfkit;
 }

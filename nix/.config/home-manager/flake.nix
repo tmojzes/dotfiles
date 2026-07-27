@@ -27,6 +27,7 @@
     in
     {
       homeConfigurations."tmojzes" = mkHome "aarch64-linux" "/home/tmojzes";
+      homeConfigurations."tmojzes-x86_64-linux" = mkHome "x86_64-linux" "/home/tmojzes";
       homeConfigurations."tmojzes-mac" = mkHome "aarch64-darwin" "/Users/tmojzes";
     };
 }
