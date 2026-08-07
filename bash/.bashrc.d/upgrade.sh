@@ -28,10 +28,18 @@ upgrade() {
         fi
     }
 
+    bob_update() {
+        version=$(curl -s https://s3.us-south.cloud-object-storage.appdomain.cloud/bobshell/bobshell-version.txt)
+        dl_url="https://s3.us-south.cloud-object-storage.appdomain.cloud/bobshell/bobshell-${version}.tgz"
+
+        npm install --reg=https://registry.npmjs.org/ -g "${dl_url}"
+    }
+
     update_tool snap "Updating Snaps" sudo snap refresh
     update_tool flatpak "Updating Flatpaks" flatpak update -y
     update_tool go-global-update "Updating Go packages" go-global-update
     update_tool rustup "Updating Rust toolchain" rustup update
+    update_tool bob "Updating Bob" bob_update
 
     if command -v home-manager &>/dev/null; then
         print_step "Updating Nix packages"
@@ -56,10 +64,12 @@ upgrade() {
     if command -v ibmcloud &>/dev/null && [ -d "$HOME/ibmcloud_homes" ]; then
         print_step "Updating IBM Cloud Plugins"
 
+        ibmcloud update plugin --all -f
+
         for ic_home in "$HOME/ibmcloud_homes"/*; do
             if [ -d "$ic_home" ]; then
                 echo "-> Profile: $(basename "$ic_home")"
-                IBMCLOUD_HOME="$ic_home" ibmcloud plugin update --all
+                IBMCLOUD_HOME="$ic_home" ibmcloud plugin update --all -f
             fi
         done
     fi
