@@ -48,6 +48,7 @@
     go-tools
     golines
     golangci-lint
+    gofumpt
     isort
     markdownlint-cli
     prettier
