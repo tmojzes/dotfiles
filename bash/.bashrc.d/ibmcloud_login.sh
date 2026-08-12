@@ -10,6 +10,7 @@ ibmcloud_login() {
 
     local base_dir="$HOME/ibmcloud_homes"
     local region="us-south"
+    local failed=0
 
     if [ ! -d "$base_dir/api_keys" ]; then
         echo "Error: Directory $base_dir/api_keys not found."
@@ -23,6 +24,19 @@ ibmcloud_login() {
 
         # The folder name IS the endpoint!
         local endpoint="https://$(basename "$endpoint_dir")"
+        local containers_host
+
+        case "$endpoint" in
+        https://cloud.ibm.com)
+            containers_host="https://containers.cloud.ibm.com"
+            ;;
+        https://test.cloud.ibm.com)
+            containers_host="https://containers.test.cloud.ibm.com"
+            ;;
+        *)
+            containers_host=""
+            ;;
+        esac
 
         # 2. Loop through the API keys inside this endpoint folder
         for api_key_file in "$endpoint_dir"/*; do
@@ -37,10 +51,23 @@ ibmcloud_login() {
             # Ensure the profile's home directory exists
             mkdir -p "$home_dir"
 
-            # Execute the login
-            IBMCLOUD_HOME="$home_dir" ibmcloud login -q --apikey @"$api_key_file" -a "$endpoint" -r "$region"
+            # Execute the login.
+            if ! IBMCLOUD_HOME="$home_dir" ibmcloud login -q --apikey @"$api_key_file" -a "$endpoint" -r "$region"; then
+                echo "Error: Login failed for profile: $profile" >&2
+                failed=1
+                continue
+            fi
+
+            if [ -n "$containers_host" ]; then
+                echo "-> Initializing Container Service endpoint: $containers_host"
+                if ! IBMCLOUD_HOME="$home_dir" ibmcloud ks init --host "$containers_host" -q; then
+                    echo "Error: Container Service initialization failed for profile: $profile" >&2
+                    failed=1
+                fi
+            fi
         done
     done
 
     print_title "Completed Logins"
+    return "$failed"
 }
