@@ -83,7 +83,6 @@
 
     # AI tools
     codex
-    gemini-cli
     goose-cli
     ollama
     opencode
