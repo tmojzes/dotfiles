@@ -22,7 +22,7 @@
     zellij
 
     # Languages & runtimes
-    beamPackages.elixir
+    beamMinimal29Packages.elixir_1_20
     go
     nodejs
     bun
