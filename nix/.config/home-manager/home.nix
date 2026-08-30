@@ -22,6 +22,7 @@
     zellij
 
     # Languages & runtimes
+    beamMinimal29Packages.erlang
     beamMinimal29Packages.elixir_1_20
     go
     nodejs
