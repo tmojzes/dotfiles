@@ -69,6 +69,7 @@
     ripgrep
     tree-sitter
     yq-go
+    grafana-loki
 
     # Shell & dotfiles tooling
     starship
