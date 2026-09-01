@@ -29,10 +29,7 @@ upgrade() {
     }
 
     bob_update() {
-        version=$(curl -s https://s3.us-south.cloud-object-storage.appdomain.cloud/bobshell/bobshell-version.txt)
-        dl_url="https://s3.us-south.cloud-object-storage.appdomain.cloud/bobshell/bobshell-${version}.tgz"
-
-        npm install --reg=https://registry.npmjs.org/ -g "${dl_url}"
+        curl -fsSL https://bob.ibm.com/download/bobshell.sh | bash
     }
 
     update_tool snap "Updating Snaps" sudo snap refresh
