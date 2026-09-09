@@ -88,6 +88,7 @@
     goose-cli
     ollama
     opencode
+    antigravity-cli
 
     # Infra & Kubernetes
     age

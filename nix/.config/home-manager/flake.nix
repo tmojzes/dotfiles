@@ -17,6 +17,10 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
+
+            # Allow no OSS packages
+            config.allowUnfree = true;
+
             config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "terraform" ];
           };
           modules = [
