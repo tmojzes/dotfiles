@@ -111,5 +111,8 @@
 
     # Virtualization
     qemu
+
+    # Cloud
+    google-cloud-sdk
   ] ++ lib.optional (pkgs.stdenv.hostPlatform.system == "aarch64-darwin") vfkit;
 }
