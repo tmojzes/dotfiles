@@ -19,7 +19,6 @@
     helix
     neovim
     tmux
-    zellij
 
     # Languages & runtimes
     beamMinimal29Packages.erlang
@@ -70,6 +69,8 @@
     tree-sitter
     yq-go
     grafana-loki
+    bottom
+    htop
 
     # Shell & dotfiles tooling
     starship
@@ -99,6 +100,7 @@
     kubebuilder
     # minikube also ships a kubectl binary; prefer the standalone one.
     (lib.hiPrio kubectl)
+    kubernetes-helm
     kustomize
     minikube
     molecule
