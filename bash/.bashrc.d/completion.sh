@@ -44,7 +44,7 @@ if command -v minikube &>/dev/null; then
 fi
 
 if command -v ibmcloud &>/dev/null; then
-    source /usr/local/ibmcloud/autocomplete/bash_autocomplete
+    source "$HOME/.local/share/bash-completion/completions/ibmcloud"
 fi
 
 if command -v terraform &>/dev/null; then
