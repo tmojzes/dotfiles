@@ -70,6 +70,7 @@
     yq-go
     grafana-loki
     bottom
+    tree
     htop
 
     # Shell & dotfiles tooling
