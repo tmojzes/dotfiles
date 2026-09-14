@@ -111,6 +111,7 @@
     talhelper
     talosctl
     terraform
+    kubectx
 
     # Virtualization
     qemu
