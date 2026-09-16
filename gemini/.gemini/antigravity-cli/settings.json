@@ -1,0 +1,24 @@
+{
+  "deny": [
+    "command(rm -rf)",
+    "command(curl .*)",
+    "command(sudo)",
+    "write_file(.git/*)",
+    "write_file(/Users/tmojzes/.ssh/*)"
+  ],
+  "enableTelemetry": false,
+  "allowNonWorkspaceAccess": true,
+  "model": "Gemini 3.8 Flash (High)",
+  "permissions": {
+    "allow": ["command(*)", "read_file(*)", "write_file(src/*)", "read_url(*)", "mcp(linter/*)"]
+  },
+  "statusLine": {
+    "type": "",
+    "command": "",
+    "enabled": true
+  },
+  "trustedWorkspaces": [
+    "/Users/tmojzes/projects",
+    "/Users/tmojzes/projects/ibm/satellite/satellite-dev-env"
+  ]
+}
