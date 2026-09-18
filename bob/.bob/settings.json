@@ -1,0 +1,27 @@
+{
+  "ibm": {
+    "isNotFirstTime": true,
+    "licenseConsent": true
+  },
+  "ibm_secrets": {},
+  "security": {
+    "auth": {
+      "selectedType": "sso"
+    }
+  },
+  "general": {
+    "vimMode": true
+  },
+  "maxTurns": 0,
+  "allowNonWorkspaceAccess": true,
+  "deny": [
+    "command(rm -rf)",
+    "command(curl .*)",
+    "command(sudo)",
+    "write_file(.git/*)",
+    "write_file(/Users/tmojzes/.ssh/*)"
+  ],
+  "permissions": {
+    "allow": ["command(*)", "read_file(*)", "write_file(src/*)", "read_url(*)", "mcp(linter/*)"]
+  }
+}
