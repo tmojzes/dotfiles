@@ -41,6 +41,7 @@
     git-lfs
     jujutsu
     lazygit
+    pre-commit
 
     # Linters & formatters
     ast-grep
@@ -56,6 +57,7 @@
     shellcheck
     yamllint
     shfmt
+    python314Packages.bc-detect-secrets
 
     # Python tooling (pipx and poetry stay on brew)
     uv
