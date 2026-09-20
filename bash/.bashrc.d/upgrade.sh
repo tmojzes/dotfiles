@@ -61,7 +61,7 @@ upgrade() {
     if command -v ibmcloud &>/dev/null && [ -d "$HOME/ibmcloud_homes" ]; then
         print_step "Updating IBM Cloud Plugins"
 
-        ibmcloud update plugin update --all -f
+        ibmcloud plugin update --all -f
 
         for ic_home in "$HOME/ibmcloud_homes"/*; do
             if [ -d "$ic_home" ]; then
