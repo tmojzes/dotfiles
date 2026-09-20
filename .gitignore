@@ -10,6 +10,6 @@ data
 lazy-lock.json
 lazyvim.json
 zig*
-bash/.local/share
+shell/.local/share
 # tmux plugins folder
 tmux/.config/tmux/plugins

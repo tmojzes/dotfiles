@@ -1,0 +1,35 @@
+# History settings (formats are incompatible between shells, so each keeps its own file)
+if [ -n "$ZSH_VERSION" ]; then
+    export HISTFILE="$HOME/.zsh_eternal_history"
+    export HISTSIZE=10000000
+    export SAVEHIST=10000000
+
+    # Append to history file immediately after each command, share across sessions.
+    setopt INC_APPEND_HISTORY
+    setopt SHARE_HISTORY
+    setopt EXTENDED_HISTORY       # Write the history file in the ":start:elapsed;command" format.
+    setopt BANG_HIST              # Treat the '!' character specially during expansion.
+    setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries first when trimming history.
+    setopt HIST_IGNORE_DUPS       # Don't record an entry that was just recorded again.
+    setopt HIST_IGNORE_ALL_DUPS   # Delete old recorded entry if a new entry is a duplicate.
+    setopt HIST_FIND_NO_DUPS      # Do not display a line previously found.
+    setopt HIST_IGNORE_SPACE      # Don't record an entry starting with a space.
+    setopt HIST_SAVE_NO_DUPS      # Don't write duplicate entries in the history file.
+    setopt HIST_REDUCE_BLANKS     # Remove superfluous blanks before recording entry.
+    setopt HIST_VERIFY            # Don't execute immediately upon history expansion.
+    setopt HIST_BEEP              # Beep when accessing nonexistent history.
+elif [ -n "$BASH_VERSION" ]; then
+    export HISTFILESIZE=
+    export HISTSIZE=
+    export HISTTIMEFORMAT="[%F %T] "
+    # Change the file location, because certain Bash sessions truncate .bash_history file upon close.
+    # <https://superuser.com/questions/575479>
+    #   Bash history truncated to 500 lines on each login
+    #
+    export HISTFILE=~/.bash_eternal_history
+    # Force prompt to write history after every command.
+    # <https://superuser.com/questions/20900/bash-history-loss>
+    #   Bash history loss when using histappend
+    #
+    PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+fi

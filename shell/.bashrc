@@ -21,15 +21,12 @@ if ! [[ "${PATH}" =~ "${HOME}/.local/bin:${HOME}/bin:" ]]; then
 fi
 export PATH
 
-# User specific aliases and functions
-if [ -d ~/.bashrc.d ]; then
-    for rc in ~/.bashrc.d/*; do
+# User specific aliases and functions (shared with zsh via ~/.shrc.d)
+if [ -d ~/.shrc.d ]; then
+    for rc in ~/.shrc.d/*; do
         if [ -f "${rc}" ]; then
             . "${rc}"
         fi
     done
 fi
 unset rc
-
-# Set vi mode
-set -o vi

@@ -21,7 +21,7 @@ Exception: `nix/.config/home-manager/flake.lock` IS committed on purpose (reprod
 ## Package notes
 
 - **nvim**: LazyVim distro config. Prefer adding a `lazyvim.plugins.extras.*` import in `lua/config/lazy.lua` over hand-written specs in `lua/plugins/` (recent commits migrate toward extras). Lua style: tabs, width 4, 100 columns (`stylua.toml`).
-- **bash / zsh**: `.bashrc` and `.zshrc` source every file in `~/.bashrc.d/` / `~/.zshrc.d/`. Add new shell behavior as a new drop-in file there instead of editing the rc files.
+- **shell**: merged bash+zsh config (replaced the former `bash/` and `zsh/` packages). `.bashrc` and `.zshrc` are thin wrappers that source every file in `~/.shrc.d/`; add new shell behavior as a new drop-in file there instead of editing the rc files. Drop-ins must work in both shells: guard shell-specific code with `if [ -n "$ZSH_VERSION" ]` / `elif [ -n "$BASH_VERSION" ]`, detect tools with `command -v` (not zsh-only `$+commands`), use POSIX function syntax. `00-completion.sh` must keep its numeric prefix so zsh's `compinit`/`bashcompinit` run before `compdef` in `alias.sh`. Bash completion data files live in `shell/.local/share/bash-completion/completions/`. Migrating a machine to this package: `stow -D bash zsh` (whichever are stowed there), then `stow shell`.
 - **git**: `.gitconfig` always includes `~/.gitconfig_base` and conditionally `~/.gitconfig_ibm` (`includeIf "gitdir/i:~/projects/ibm/"`). Work-specific identity/settings go in `.gitconfig_ibm`, personal in `.gitconfig_base`.
 - **opencode**: the user's *global* opencode config deployed via stow — not repo-local config for working in this repo.
 - **pacman**: contains only `makepkg.conf`.

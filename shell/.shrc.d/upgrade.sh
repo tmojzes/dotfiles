@@ -18,7 +18,7 @@ upgrade() {
         sudo zypper update -y
     fi
 
-    # Reusable helper for optional tools
+    # 2. Reusable helper for optional tools
     update_tool() {
         local cmd=$1
         local msg=$2
@@ -30,15 +30,24 @@ upgrade() {
         fi
     }
 
+    bob_update() {
+        curl -fsSL https://bob.ibm.com/download/bobshell.sh | bash
+    }
+
     update_tool snap "Updating Snaps" sudo snap refresh
     update_tool flatpak "Updating Flatpaks" flatpak update -y
     update_tool go-global-update "Updating Go packages" go-global-update
     update_tool rustup "Updating Rust toolchain" rustup update
+    update_tool bob "Updating Bob" bob_update
 
     if command -v home-manager &>/dev/null; then
         print_step "Updating Nix packages"
         hm_target="tmojzes"
-        [ "$(uname)" = "Darwin" ] && hm_target="tmojzes-mac"
+        if [ "$(uname)" = "Darwin" ]; then
+            hm_target="tmojzes-mac"
+        elif [ "$(uname -m)" = "x86_64" ]; then
+            hm_target="tmojzes-x86_64-linux"
+        fi
         nix flake update --flake "$HOME/.config/home-manager" &&
             home-manager switch --flake "$HOME/.config/home-manager#$hm_target"
     fi
@@ -54,10 +63,12 @@ upgrade() {
     if command -v ibmcloud &>/dev/null && [ -d "$HOME/ibmcloud_homes" ]; then
         print_step "Updating IBM Cloud Plugins"
 
+        ibmcloud plugin update --all -f
+
         for ic_home in "$HOME/ibmcloud_homes"/*; do
             if [ -d "$ic_home" ]; then
                 echo "-> Profile: $(basename "$ic_home")"
-                IBMCLOUD_HOME="$ic_home" ibmcloud plugin update --all
+                IBMCLOUD_HOME="$ic_home" ibmcloud plugin update --all -f
             fi
         done
     fi
