@@ -16,7 +16,6 @@
 
   home.packages = with pkgs; [
     # Editors & terminal
-    helix
     neovim
     tmux
 
@@ -39,7 +38,6 @@
     # Git & GitHub
     gh
     git-lfs
-    jujutsu
     lazygit
     pre-commit
 
@@ -74,6 +72,7 @@
     bottom
     tree
     htop
+    viddy
 
     # Shell & dotfiles tooling
     starship
@@ -88,8 +87,6 @@
     tailwindcss
 
     # AI tools
-    codex
-    goose-cli
     ollama
     opencode
     antigravity-cli
