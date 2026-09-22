@@ -5,6 +5,8 @@ set -o vi
 if [ -n "$ZSH_VERSION" ]; then
     # Set backward delete with backspace
     bindkey -v '^?' backward-delete-char
-    # Set ctrl + r for search in zsh history
-    bindkey -v '^R' history-incremental-search-backward
+    # Fallback ctrl + r for search in zsh history when fzf is not installed
+    if ! command -v fzf &>/dev/null; then
+        bindkey -v '^R' history-incremental-search-backward
+    fi
 fi

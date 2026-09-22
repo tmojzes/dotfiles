@@ -1,11 +1,10 @@
 # History settings (formats are incompatible between shells, so each keeps its own file)
 if [ -n "$ZSH_VERSION" ]; then
     export HISTFILE="$HOME/.zsh_eternal_history"
-    export HISTSIZE=10000000
-    export SAVEHIST=10000000
+    export HISTSIZE=100000000
+    export SAVEHIST=100000000
 
-    # Append to history file immediately after each command, share across sessions.
-    setopt INC_APPEND_HISTORY
+    # Share history across sessions and append immediately.
     setopt SHARE_HISTORY
     setopt EXTENDED_HISTORY       # Write the history file in the ":start:elapsed;command" format.
     setopt BANG_HIST              # Treat the '!' character specially during expansion.
@@ -19,8 +18,12 @@ if [ -n "$ZSH_VERSION" ]; then
     setopt HIST_VERIFY            # Don't execute immediately upon history expansion.
     setopt HIST_BEEP              # Beep when accessing nonexistent history.
 elif [ -n "$BASH_VERSION" ]; then
+    # Infinite history: empty value disables trimming in Bash
     export HISTFILESIZE=
     export HISTSIZE=
+    # Deduplicate commands: erase older duplicates and ignore commands starting with space
+    export HISTCONTROL=ignoreboth:erasedups
+    shopt -s histappend
     export HISTTIMEFORMAT="[%F %T] "
     # Change the file location, because certain Bash sessions truncate .bash_history file upon close.
     # <https://superuser.com/questions/575479>
