@@ -9,7 +9,7 @@ export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 if command -v systemctl &>/dev/null; then
     export WAYLAND_DISPLAY=$(systemctl --user show-environment | grep '^WAYLAND_DISPLAY=' | cut -d= -f2)
 fi
-export GOBIN="$HOME/go/bin/"
+export GOBIN="$HOME/go/bin"
 export NPM_BIN="$(npm config get prefix)/bin"
 export GO_INSTALL_PATH="/usr/local/go/bin"
 export ODIN_BIN="$HOME/projects/oss/Odin/"
