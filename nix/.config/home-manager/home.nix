@@ -39,7 +39,12 @@
     gh
     git-lfs
     lazygit
-    pre-commit
+    (pre-commit.overridePythonAttrs (_: {
+      doCheck = false;
+      dontUsePytestCheck = true;
+      nativeCheckInputs = [];
+      preCheck = "";
+    }))
 
     # Linters & formatters
     ast-grep
