@@ -7,10 +7,18 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    opencode = {
+      url = "github:anomalyco/opencode/v2.0.16";
+    };
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }:
+    {
+      nixpkgs,
+      home-manager,
+      opencode,
+      ...
+    }:
     let
       mkHome =
         system: homeDirectory:
@@ -22,6 +30,22 @@
             config.allowUnfree = true;
 
             config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "terraform" ];
+
+            overlays = [
+              (final: prev: {
+                opencode = opencode.packages.${system}.opencode.overrideAttrs (old: {
+                  postInstall = ''
+                    installShellCompletion --cmd opencode \
+                      --bash <($out/bin/opencode --completions bash) \
+                      --zsh <(SHELL=/bin/zsh $out/bin/opencode --completions zsh)
+
+                    installShellCompletion --cmd opencode2 \
+                      --bash <($out/bin/opencode2 --completions bash) \
+                      --zsh <(SHELL=/bin/zsh $out/bin/opencode2 --completions zsh)
+                  '';
+                });
+              })
+            ];
           };
           modules = [
             ./home.nix
