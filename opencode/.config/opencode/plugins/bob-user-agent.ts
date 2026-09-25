@@ -108,6 +108,7 @@ export default {
 
         let parsed: {
           tools?: Array<{ function?: Record<string, unknown> }>;
+          messages?: Array<Record<string, unknown>>;
         };
         try {
           parsed = JSON.parse(bodyText);
@@ -120,6 +121,17 @@ export default {
           if (fn && Object.prototype.hasOwnProperty.call(fn, "strict")) {
             delete fn.strict;
             changed = true;
+          }
+        }
+        // The gateway also rejects reasoning parts replayed on assistant
+        // messages (422 "unexpected property" at body.messages[*].reasoning).
+        for (const message of parsed.messages ?? []) {
+          if (!message || typeof message !== "object") continue;
+          for (const key of ["reasoning", "reasoning_content"]) {
+            if (key in message) {
+              delete message[key];
+              changed = true;
+            }
           }
         }
         if (!changed) return;
