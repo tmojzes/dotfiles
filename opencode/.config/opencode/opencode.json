@@ -13,9 +13,6 @@
     "bobshell": {
       "name": "IBM Bob-Shell",
       "npm": "@ai-sdk/openai-compatible",
-      // Raw Authorization header on purpose: the Bob gateway requires the
-      // `apikey` prefix and rejects the `Bearer` token the SDK would send for
-      // an apiKey setting.
       "options": {
         "baseURL": "https://api.us-east.bob.ibm.com/inference/v1"
       },
@@ -105,6 +102,22 @@
       "environment": {
         "JENKINS_USER": "{env:JENKINS_USER}",
         "JENKINS_API_KEY": "{env:JENKINS_API_KEY}"
+      }
+    },
+
+    // armada-xo bot commands in #armada-xo of IBM's enterprise Slack
+    // (mcp/mcp/cmd/slack, built to ~/.local/bin/slack-mcp by
+    // `cd ~/mcp && go tool task build`). Posts only in #armada-xo, as a
+    // reply under the latest ':thread:debug satellite' thread. Session
+    // credentials (xoxc token + d cookie, both required) are hand-exported
+    // from ~/keys and expire with the Slack session; refresh them with the
+    // slack-token skill.
+    "slack": {
+      "type": "local",
+      "command": ["slack-mcp"],
+      "environment": {
+        "SLACK_XOXC": "{env:SLACK_XOXC}",
+        "SLACK_XOXD": "{env:SLACK_XOXD}"
       }
     }
   },
