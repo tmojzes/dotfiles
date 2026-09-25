@@ -1,0 +1,40 @@
+version: '3'
+
+vars:
+  BIN_DIR: '{{.HOME}}/.local/bin'
+  SERVERS:
+    sh: ls -1 cmd | paste -sd, -
+
+tasks:
+  default:
+    desc: Build all MCP servers
+    cmds:
+      - task: build
+
+  build:
+    desc: Build all MCP servers to ~/.local/bin
+    cmds:
+      - for:
+          var: SERVERS
+          split: ','
+        cmd: go build -o {{.BIN_DIR}}/{{.ITEM}}-mcp ./cmd/{{.ITEM}}
+    sources:
+      - '**/*.go'
+      - go.mod
+      - go.sum
+
+  test:
+    desc: Run go tests
+    cmd: go test ./...
+
+  fmt:
+    desc: Format with gofumpt
+    cmd: go tool gofumpt -l -w .
+
+  lint:
+    desc: Static analysis with staticcheck
+    cmd: go tool staticcheck ./...
+
+  vuln:
+    desc: Dependency audit with govulncheck
+    cmd: go tool govulncheck ./...
