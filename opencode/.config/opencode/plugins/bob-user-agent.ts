@@ -9,6 +9,10 @@ import { execFileSync } from "node:child_process";
 //    definitions: `tools[*].function.strict` is an "unexpected property"
 //    (422, application/problem+json). It has to be stripped from every
 //    tool before the request goes out.
+// 3. Same for `reasoning_effort` on the request body and the replayed
+//    `reasoning`/`reasoning_content` parts on assistant messages:
+//    "native reasoning control reasoning_effort is not allowed" /
+//    "unexpected property" — both get stripped in the same hook.
 //
 // NOTE: no `@opencode/plugin` import. The SDK's Plugin.define is an identity
 // function (dist/promise/plugin.js), so a plain `{ id, setup }` object is a
@@ -46,11 +50,17 @@ export default {
     }
     dump("setup", { userAgent });
 
-    // User-Agent spoofing: applied to every bobshell model request.
+    // User-Agent spoofing + raw apikey auth: applied to every bobshell model
+    // request. The gateway requires the `apikey` Authorization prefix and
+    // rejects the `Bearer` token the SDK sends from the apiKey setting, so the
+    // header is set here, after SDK auth (config `headers` is not honored in
+    // v2.0.16).
     await ctx.session.hook(
       "model.request",
       (event) => {
         event.headers["User-Agent"] = userAgent;
+        const key = process.env.BOB_API_KEY;
+        if (key) event.headers["Authorization"] = `apikey ${key}`;
       },
       { providerID: "bobshell" },
     );
@@ -102,11 +112,16 @@ export default {
             bodyType: typeof raw,
           });
         }
-        if (!bodyText || !bodyText.includes('"strict"')) return;
+        const wantsStrict = bodyText.includes('"strict"');
+        const wantsReasoningEffort = bodyText.includes('"reasoning_effort"');
+        const wantsReasoningParts =
+          bodyText.includes('"reasoning"') || bodyText.includes('"reasoning_content"');
+        if (!wantsStrict && !wantsReasoningEffort && !wantsReasoningParts) return;
 
         let parsed: {
           tools?: Array<{ function?: Record<string, unknown> }>;
           messages?: Array<Record<string, unknown>>;
+          reasoning_effort?: unknown;
         };
         try {
           parsed = JSON.parse(bodyText);
@@ -131,6 +146,12 @@ export default {
               changed = true;
             }
           }
+        }
+        // And it rejects the reasoning-effort request knob ("native
+        // reasoning control reasoning_effort is not allowed").
+        if (parsed.reasoning_effort !== undefined) {
+          delete parsed.reasoning_effort;
+          changed = true;
         }
         if (!changed) return;
 
