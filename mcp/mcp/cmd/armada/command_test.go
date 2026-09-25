@@ -56,7 +56,7 @@ func TestNormalizeCommand(t *testing.T) {
 }
 
 func TestNormalizeCommands(t *testing.T) {
-	raw := []any{
+	raw := []string{
 		"kubectl get nodes; get ns",
 		"kubectl top pods\nget pv",
 		"  oc  describe node  ",
@@ -72,11 +72,10 @@ func TestNormalizeCommands(t *testing.T) {
 }
 
 func TestNormalizeCommandsRejections(t *testing.T) {
-	for name, raw := range map[string]any{
-		"not a list":    "get nodes",
-		"non-string":    []any{1},
-		"empty list":    []any{},
-		"empty entries": []any{";\n"},
+	for name, raw := range map[string][]string{
+		"nil list":      nil,
+		"empty list":    {},
+		"empty entries": {";\n"},
 	} {
 		if _, err := normalizeCommands(raw); err == nil {
 			t.Errorf("%s: normalizeCommands(%#v) should fail", name, raw)

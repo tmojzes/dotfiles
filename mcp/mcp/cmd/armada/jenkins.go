@@ -216,12 +216,12 @@ type executeResult struct {
 	Results []commandResult `json:"results"`
 }
 
-func executeReadonlyCommands(ctx context.Context, cfg serverConfig, clusterIDRaw, commandsRaw any) (*executeResult, error) {
-	clusterID, ok := clusterIDRaw.(string)
-	if !ok || strings.TrimSpace(clusterID) == "" {
+func executeReadonlyCommands(ctx context.Context, cfg serverConfig, clusterID string, commands []string) (*executeResult, error) {
+	clusterID = strings.TrimSpace(clusterID)
+	if clusterID == "" {
 		return nil, errors.New("cluster_id must be a non-empty string")
 	}
-	commands, err := normalizeCommands(commandsRaw)
+	normalizedCommands, err := normalizeCommands(commands)
 	if err != nil {
 		return nil, err
 	}
@@ -229,7 +229,7 @@ func executeReadonlyCommands(ctx context.Context, cfg serverConfig, clusterIDRaw
 	if err != nil {
 		return nil, err
 	}
-	return client.runCommands(ctx, strings.TrimSpace(clusterID), commands)
+	return client.runCommands(ctx, clusterID, normalizedCommands)
 }
 
 func (c *jenkinsClient) runCommands(ctx context.Context, clusterID string, commands []string) (*executeResult, error) {

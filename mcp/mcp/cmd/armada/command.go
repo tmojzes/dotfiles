@@ -30,11 +30,7 @@ var (
 )
 
 // splitCommandInput splits one raw commands entry on ';' and newlines.
-func splitCommandInput(raw any) ([]string, error) {
-	command, ok := raw.(string)
-	if !ok {
-		return nil, errors.New("each command must be a string")
-	}
+func splitCommandInput(command string) ([]string, error) {
 	var parts []string
 	for _, part := range commandSplitRe.Split(command, -1) {
 		if part = strings.TrimSpace(part); part != "" {
@@ -100,15 +96,14 @@ func normalizeCommand(command string) (string, error) {
 	return command, nil
 }
 
-// normalizeCommands validates the commands argument: a list of strings, each
-// possibly holding several commands separated by ';' or newlines.
-func normalizeCommands(raw any) ([]string, error) {
-	items, ok := raw.([]any)
-	if !ok {
+// normalizeCommands validates the commands argument and expands entries that
+// hold several commands separated by ';' or newlines.
+func normalizeCommands(commands []string) ([]string, error) {
+	if commands == nil {
 		return nil, errors.New("commands must be a list of command strings")
 	}
 	var normalized []string
-	for _, item := range items {
+	for _, item := range commands {
 		parts, err := splitCommandInput(item)
 		if err != nil {
 			return nil, err
