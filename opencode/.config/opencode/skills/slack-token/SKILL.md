@@ -69,10 +69,10 @@ for db in glob.glob(os.path.expanduser("~/Library/Application Support/Google/Chr
 ### Step 2 — Extract the `xoxc-` token from localStorage leveldb (all profiles)
 
 ```bash
-for prof in "Default" "Profile 1"; do
+for prof in "Default" "Profile 1" "Profile 2" "Profile 3"; do
   d=~/Library/Application\ Support/Google/Chrome/$prof/Local\ Storage/leveldb
   [ -d "$d" ] || continue
-  hits=$(cat "$d"/*.ldb "$d"/*.log 2>/dev/null | strings 2>/dev/null | grep -o 'xoxc-[0-9A-Za-z][0-9A-Za-z-]*' | sort -u)
+  hits=$(strings "$d"/*.ldb "$d"/*.log 2>/dev/null | grep -o 'xoxc-[0-9A-Za-z][0-9A-Za-z-]*' | sort -u)
   if [ -n "$hits" ]; then echo "== $prof =="; echo "$hits"; fi
 done
 ```
@@ -94,6 +94,26 @@ curl -sS -H "Authorization: Bearer $XOXC" -H "Cookie: d=$XOXD" \
   pick the profile whose tokens match the workspace the user asked about.
 - Use **matching** `xoxc` + `xoxd` from the **same profile**.
 - The `d` cookie value works URL-encoded or URL-decoded (both verified).
+
+### Step 4 — Save to `~/keys/` and export
+
+Once the correct pair is identified, save them to the canonical key files:
+
+```bash
+echo -n "<xoxc-token>" > ~/keys/slack-xoxc
+echo -n "<xoxd-value>" > ~/keys/slack-d-cookie
+```
+
+Then provide the export commands to the user so they can reload the MCP server environment:
+
+```bash
+export SLACK_XOXC=$(cat ~/keys/slack-xoxc)
+export SLACK_XOXD=$(cat ~/keys/slack-d-cookie)
+```
+
+**Important:** The `slack` MCP server reads `SLACK_XOXC`/`SLACK_XOXD` from the environment it was launched with (`{env:SLACK_XOXC}` in `opencode.json`). If OpenCode was started before these were exported, the MCP server process won't see the new values until OpenCode is restarted. Tell the user to:
+1. Export the vars in the shell that launched OpenCode
+2. Restart OpenCode (or just the MCP service if hot-reload is available)
 
 ### Failure modes
 
