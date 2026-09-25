@@ -31,7 +31,6 @@ Exception: `nix/.config/home-manager/flake.lock` IS committed on purpose (reprod
 ## Known stale/broken
 
 - README and `scripts/.local/bin/{install,list}-*.sh` reference a `programs/` package-list directory that no longer exists — those scripts are broken; don't rely on them or "fix" them against that path.
-- `opencode/.config/opencode/mcp/armada.py` is the old Python implementation of the armada Jenkins kubectl MCP server, kept as reference only (untracked, unregistered) until the Go port in `mcp/mcp/cmd/armada/` lands; after the port, delete it and the then-dangling `~/.config/opencode/mcp` symlink. It embeds an old Jenkins credential — the current token lives in `~/keys/jenkins-api-key`; revoke the embedded one.
 
 ## Git workflow
 
