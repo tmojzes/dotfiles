@@ -15,31 +15,24 @@
       "name": "IBM Bob-Shell",
       "package": "aisdk:@ai-sdk/openai-compatible",
       // Raw Authorization header on purpose: the Bob gateway requires the
-      // `Apikey` prefix and rejects the `Bearer` token the SDK would send for
+      // `apikey` prefix and rejects the `Bearer` token the SDK would send for
       // an apiKey setting.
       "headers": {
-        "Authorization": "Apikey {env:BOB_API_KEY}"
+        "Authorization": "apikey {env:BOB_API_KEY}"
       },
       "settings": {
         "baseURL": "https://api.us-east.bob.ibm.com/inference/v1"
       },
+      // Model names/limits come from GET /inference/v1/model/info on the
+      // gateway (bob 2.x LiteLLM router) — the underlying Claude/GPT models
+      // are not exposed by name.
       "models": {
-        "sonnet-4.6": {
-          "name": "Bob: Claude Sonnet 4.6",
-          "limit": { "context": 270000, "output": 64000 }
-        },
-        "sonnet-4.5": {
-          "name": "Bob: Claude Sonnet 4.5",
-          "limit": { "context": 200000, "output": 64000 }
-        },
-        "haiku-4.5": {
-          "name": "Bob: Claude Haiku 4.5",
-          "limit": { "context": 200000, "output": 64000 }
-        },
-        "gpt-2026-5.4": {
-          "name": "Bob: GPT-5.4",
-          "limit": { "context": 200000, "output": 128000 }
-        }
+        "premium":       { "name": "Bob: Premium (agent)", "limit": { "context": 200000,  "output": 64000 } },
+        "premium-ide":   { "name": "Bob: Premium IDE",     "limit": { "context": 270000,  "output": 64000 } },
+        "premium-shell": { "name": "Bob: Premium Shell",   "limit": { "context": 270000,  "output": 64000 } },
+        "fast":          { "name": "Bob: Fast",            "limit": { "context": 200000,  "output": 64000 } },
+        "explorer":      { "name": "Bob: Explorer",        "limit": { "context": 200000,  "output": 64000 } },
+        "wxO-model":     { "name": "Bob: wxO (1M ctx)",    "limit": { "context": 1000000, "output": 64000 } }
       }
     }
   },
