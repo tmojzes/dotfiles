@@ -27,7 +27,7 @@ const toolDescription = "Use this tool for readonly investigation of a specific 
 // input schema from it (both fields required); jsonschema tags carry the
 // property descriptions.
 type armadaKubectlInput struct {
-	ClusterID string   `json:"cluster_id" jsonschema:"Cluster ID to pass as the CLUSTER Jenkins parameter"`
+	ClusterID string   `json:"cluster_id" jsonschema:"The opaque Armada cluster ID to pass as the CLUSTER Jenkins parameter. This is NOT the human-readable carrier name (e.g. not 'prod-lon04-carrier106'). It is a short alphanumeric string of 16-20 lowercase letters and digits, for example 'a1b2c3d4e5f6g7h8'. Obtain it from cluster listings or the user — do not pass a carrier hostname."`
 	Commands  []string `json:"commands" jsonschema:"List of readonly kubectl subcommands. Each entry may optionally start with 'kubectl' or 'oc', but only get, describe, logs, top, api-resources, and version are allowed. Multiple commands may be provided either as separate array items or combined in a single string separated by ';' or newlines. Example: ['kubectl get nodes', 'kubectl get pods -A']"`
 }
 

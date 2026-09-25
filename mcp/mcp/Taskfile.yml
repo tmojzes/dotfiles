@@ -22,6 +22,8 @@ tasks:
       - '**/*.go'
       - go.mod
       - go.sum
+    generates:
+      - '{{.BIN_DIR}}/*-mcp'
 
   test:
     desc: Run go tests
