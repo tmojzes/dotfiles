@@ -13,3 +13,5 @@ zig*
 shell/.local/share
 # tmux plugins folder
 tmux/.config/tmux/plugins
+# mcp server binaries built into ~/.local/bin (stow fold over scripts/.local/bin)
+scripts/.local/bin/*-mcp
