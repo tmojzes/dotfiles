@@ -29,9 +29,7 @@ export default {
   id: "bob-user-agent",
   async setup(ctx) {
     const userAgent = `bob-shell/${bobVersion()}`;
-    // TEMPORARY: unconditional for the 422 diagnosis; gate behind
-    // BOB_PLUGIN_DEBUG once verified.
-    const debug = true;
+    const debug = process.env.BOB_PLUGIN_DEBUG === "1";
     let dump: (label: string, data: unknown) => void = () => {};
     if (debug) {
       const { appendFileSync } = await import("node:fs");
