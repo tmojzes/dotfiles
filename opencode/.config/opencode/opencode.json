@@ -5,22 +5,18 @@
 
   "default_agent": "build",
 
-  // Explicit allow-all (same behavior as the old V1
-  // `"permission": { "*": "allow" }`): nothing prompts, including .env reads
+  // Explicit allow-all: nothing prompts, including .env reads
   // and access outside the workspace.
-  "permissions": [{ "action": "*", "resource": "*", "effect": "allow" }],
+  "permission": "allow",
 
-  "providers": {
+  "provider": {
     "bobshell": {
       "name": "IBM Bob-Shell",
-      "package": "aisdk:@ai-sdk/openai-compatible",
+      "npm": "@ai-sdk/openai-compatible",
       // Raw Authorization header on purpose: the Bob gateway requires the
       // `apikey` prefix and rejects the `Bearer` token the SDK would send for
       // an apiKey setting.
-      "headers": {
-        "Authorization": "apikey {env:BOB_API_KEY}"
-      },
-      "settings": {
+      "options": {
         "baseURL": "https://api.us-east.bob.ibm.com/inference/v1"
       },
       // Model names/limits come from GET /inference/v1/model/info on the
@@ -49,9 +45,9 @@
     }
   },
 
-  "agents": {
+  "agent": {
     // ---------------------------------------------------------
-    // PRIMARY AGENTS (ChatGPT Plus)
+    // PRIMARY AGENTS
     // ---------------------------------------------------------
     "build": {
       "mode": "primary",
@@ -63,7 +59,7 @@
       "mode": "primary",
       "description": "Architectural analysis, edge-case detection, and complex planning.",
       "model": "opencode-go/glm-5.3",
-      "system": "You are a Staff Software Engineer. Focus on architectural analysis, identifying edge cases, and planning. Do not write the final code directly."
+      "prompt": "You are a Staff Software Engineer. Focus on architectural analysis, identifying edge cases, and planning. Do not write the final code directly."
     },
 
     // ---------------------------------------------------------
@@ -89,7 +85,7 @@
       "mode": "subagent",
       "description": "Code review, syntax checking, and diff analysis.",
       "model": "opencode-go/glm-5.3",
-      "system": "Review code diffs for syntax errors, missing edge cases, security issues, and bad patterns. Keep output concise."
+      "prompt": "Review code diffs for syntax errors, missing edge cases, security issues, and bad patterns. Keep output concise."
     },
 
     // Hidden maintenance agent replaces the V1 `small_model`
@@ -103,17 +99,15 @@
   // from ~/keys, like BOB_API_KEY. Tools appear as armada_*; a Jenkins
   // round trip takes ~5 minutes, so batch commands into one call.
   "mcp": {
-    "servers": {
-      "armada": {
-        "type": "local",
-        "command": ["armada-mcp"],
-        "environment": {
-          "JENKINS_USER": "{env:JENKINS_USER}",
-          "JENKINS_API_KEY": "{env:JENKINS_API_KEY}"
-        }
+    "armada": {
+      "type": "local",
+      "command": ["armada-mcp"],
+      "environment": {
+        "JENKINS_USER": "{env:JENKINS_USER}",
+        "JENKINS_API_KEY": "{env:JENKINS_API_KEY}"
       }
     }
   },
 
-  "plugins": [{ "package": "./plugins/bob-user-agent.ts" }]
+  "plugin": ["./plugins/bob-user-agent.ts"]
 }
