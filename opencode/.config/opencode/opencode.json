@@ -92,5 +92,23 @@
     "title": { "model": "opencode-go/deepseek-v4-flash" }
   },
 
+  // Registered as disabled until the Go port in dotfiles/mcp/mcp/cmd/armada
+  // lands (then flip disabled to false). The binary comes from
+  // `cd ~/mcp && go tool task build` (~/.local/bin/armada-mcp). Credentials
+  // are hand-exported from ~/keys, like BOB_API_KEY.
+  "mcp": {
+    "servers": {
+      "armada": {
+        "type": "local",
+        "command": ["armada-mcp"],
+        "environment": {
+          "JENKINS_USER": "{env:JENKINS_USER}",
+          "JENKINS_API_KEY": "{env:JENKINS_API_KEY}"
+        },
+        "disabled": true
+      }
+    }
+  },
+
   "plugins": [{ "package": "./plugins/bob-user-agent.ts" }]
 }
