@@ -3,24 +3,25 @@
 
   "model": "opencode-go/glm-5.3",
 
-  // High-speed background processing (compaction, summaries)
-  "small_model": "opencode-go/deepseek-v4-flash",
-
   "default_agent": "build",
-  "lsp": true,
-  "permission": {
-    "*": "allow"
-  },
 
-  "provider": {
+  // Explicit allow-all (same behavior as the old V1
+  // `"permission": { "*": "allow" }`): nothing prompts, including .env reads
+  // and access outside the workspace.
+  "permissions": [{ "action": "*", "resource": "*", "effect": "allow" }],
+
+  "providers": {
     "bobshell": {
-      "npm": "@ai-sdk/openai-compatible",
       "name": "IBM Bob-Shell",
-      "options": {
-        "baseURL": "https://api.us-east.bob.ibm.com/inference/v1",
-        "headers": {
-          "Authorization": "Apikey {env:BOBSHELL_API_KEY}"
-        }
+      "package": "aisdk:@ai-sdk/openai-compatible",
+      // Raw Authorization header on purpose: the Bob gateway requires the
+      // `Apikey` prefix and rejects the `Bearer` token the SDK would send for
+      // an apiKey setting.
+      "headers": {
+        "Authorization": "Apikey {env:BOB_API_KEY}"
+      },
+      "settings": {
+        "baseURL": "https://api.us-east.bob.ibm.com/inference/v1"
       },
       "models": {
         "sonnet-4.6": {
@@ -35,12 +36,15 @@
           "name": "Bob: Claude Haiku 4.5",
           "limit": { "context": 200000, "output": 64000 }
         },
-        "gpt-2026-5.4": { "name": "Bob: GPT-5.4", "limit": { "context": 200000, "output": 128000 } }
+        "gpt-2026-5.4": {
+          "name": "Bob: GPT-5.4",
+          "limit": { "context": 200000, "output": 128000 }
+        }
       }
     }
   },
 
-  "agent": {
+  "agents": {
     // ---------------------------------------------------------
     // PRIMARY AGENTS (ChatGPT Plus)
     // ---------------------------------------------------------
@@ -54,7 +58,7 @@
       "mode": "primary",
       "description": "Architectural analysis, edge-case detection, and complex planning.",
       "model": "opencode-go/glm-5.3",
-      "prompt": "You are a Staff Software Engineer. Focus on architectural analysis, identifying edge cases, and planning. Do not write the final code directly."
+      "system": "You are a Staff Software Engineer. Focus on architectural analysis, identifying edge cases, and planning. Do not write the final code directly."
     },
 
     // ---------------------------------------------------------
@@ -75,12 +79,18 @@
       "model": "opencode-go/deepseek-v4-flash"
     },
 
-    // HIGH INTEL TIER: Upgraded to GLM-5.2 for deep code inspection
+    // HIGH INTEL TIER: GLM-5.3 for deep code inspection
     "reviewer": {
       "mode": "subagent",
       "description": "Code review, syntax checking, and diff analysis.",
       "model": "opencode-go/glm-5.3",
-      "prompt": "Review code diffs for syntax errors, missing edge cases, security issues, and bad patterns. Keep output concise."
-    }
-  }
+      "system": "Review code diffs for syntax errors, missing edge cases, security issues, and bad patterns. Keep output concise."
+    },
+
+    // Hidden maintenance agent replaces the V1 `small_model`
+    // (session titles/summaries).
+    "title": { "model": "opencode-go/deepseek-v4-flash" }
+  },
+
+  "plugins": [{ "package": "./plugins/bob-user-agent.ts" }]
 }
