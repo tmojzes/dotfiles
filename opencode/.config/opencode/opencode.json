@@ -92,10 +92,11 @@
     "title": { "model": "opencode-go/deepseek-v4-flash" }
   },
 
-  // Registered as disabled until the Go port in dotfiles/mcp/mcp/cmd/armada
-  // lands (then flip disabled to false). The binary comes from
-  // `cd ~/mcp && go tool task build` (~/.local/bin/armada-mcp). Credentials
-  // are hand-exported from ~/keys, like BOB_API_KEY.
+  // Readonly kubectl against armada clusters via a Jenkins job
+  // (mcp/mcp/cmd/armada, built to ~/.local/bin/armada-mcp by
+  // `cd ~/mcp && go tool task build`). Credentials are hand-exported
+  // from ~/keys, like BOB_API_KEY. Tools appear as armada_*; a Jenkins
+  // round trip takes ~5 minutes, so batch commands into one call.
   "mcp": {
     "servers": {
       "armada": {
@@ -104,8 +105,7 @@
         "environment": {
           "JENKINS_USER": "{env:JENKINS_USER}",
           "JENKINS_API_KEY": "{env:JENKINS_API_KEY}"
-        },
-        "disabled": true
+        }
       }
     }
   },
