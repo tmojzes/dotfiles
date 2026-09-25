@@ -27,12 +27,24 @@
       // gateway (bob 2.x LiteLLM router) — the underlying Claude/GPT models
       // are not exposed by name.
       "models": {
-        "premium":       { "name": "Bob: Premium (agent)", "limit": { "context": 200000,  "output": 64000 } },
-        "premium-ide":   { "name": "Bob: Premium IDE",     "limit": { "context": 270000,  "output": 64000 } },
-        "premium-shell": { "name": "Bob: Premium Shell",   "limit": { "context": 270000,  "output": 64000 } },
-        "fast":          { "name": "Bob: Fast",            "limit": { "context": 200000,  "output": 64000 } },
-        "explorer":      { "name": "Bob: Explorer",        "limit": { "context": 200000,  "output": 64000 } },
-        "wxO-model":     { "name": "Bob: wxO (1M ctx)",    "limit": { "context": 1000000, "output": 64000 } }
+        "premium": {
+          "name": "Bob: Premium (agent)",
+          "limit": { "context": 200000, "output": 64000 }
+        },
+        "premium-ide": {
+          "name": "Bob: Premium IDE",
+          "limit": { "context": 270000, "output": 64000 }
+        },
+        "premium-shell": {
+          "name": "Bob: Premium Shell",
+          "limit": { "context": 270000, "output": 64000 }
+        },
+        "fast": { "name": "Bob: Fast", "limit": { "context": 200000, "output": 64000 } },
+        "explorer": { "name": "Bob: Explorer", "limit": { "context": 200000, "output": 64000 } },
+        "wxO-model": {
+          "name": "Bob: wxO (1M ctx)",
+          "limit": { "context": 1000000, "output": 64000 }
+        }
       }
     }
   },
