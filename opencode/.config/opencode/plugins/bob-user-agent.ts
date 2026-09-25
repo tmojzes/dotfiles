@@ -29,7 +29,9 @@ export default {
   id: "bob-user-agent",
   async setup(ctx) {
     const userAgent = `bob-shell/${bobVersion()}`;
-    const debug = process.env.BOB_PLUGIN_DEBUG === "1";
+    // TEMPORARY: unconditional for the 422 diagnosis; gate behind
+    // BOB_PLUGIN_DEBUG once verified.
+    const debug = true;
     let dump: (label: string, data: unknown) => void = () => {};
     if (debug) {
       const { appendFileSync } = await import("node:fs");
@@ -56,26 +58,51 @@ export default {
     );
 
     // Strip `strict` from all tools on the serialized request body. Handles
-    // both a plain request object (string body) and a fetch Request.
+    // every body representation seen in the wild: plain string, Buffer/
+    // Uint8Array, fetch Request (clone + text), or a text()-bearing object.
     await ctx.session.hook(
       "http.request",
       async (event) => {
-        const req = event.request as
-          | (Request & { body?: unknown })
+        const req = (event as { request?: unknown }).request as
+          | (Record<string, unknown> & { clone?: unknown })
           | undefined;
         if (!req) return;
 
         let bodyText: string | undefined;
-        let plainBody = false;
-        if (typeof req.body === "string") {
-          bodyText = req.body;
-          plainBody = true;
+        let bodyKind = "unknown";
+        const raw = req.body;
+        if (typeof raw === "string") {
+          bodyText = raw;
+          bodyKind = "string";
+        } else if (raw instanceof Uint8Array) {
+          bodyText = new TextDecoder().decode(raw);
+          bodyKind = "uint8array";
         } else if (typeof req.clone === "function") {
           try {
-            bodyText = await req.clone().text();
+            bodyText = await (req as Request).clone().text();
+            bodyKind = "fetch-clone";
           } catch {
-            return;
+            bodyKind = "clone-failed";
           }
+        } else if (typeof req.text === "function") {
+          try {
+            bodyText = await (req.text() as Promise<string>);
+            bodyKind = "text()";
+          } catch {
+            bodyKind = "text-failed";
+          }
+        }
+        if (debug) {
+          const proto = Object.getPrototypeOf(event) as object | null;
+          const reqProto = req ? Object.getPrototypeOf(req) : null;
+          dump("http.request.shape", {
+            eventProto: proto ? Object.getOwnPropertyNames(proto) : null,
+            requestKind: req?.constructor?.name,
+            requestProto: reqProto ? Object.getOwnPropertyNames(reqProto) : null,
+            requestKeys: req ? Object.keys(req) : null,
+            bodyKind,
+            bodyType: typeof raw,
+          });
         }
         if (!bodyText || !bodyText.includes('"strict"')) return;
 
@@ -98,16 +125,18 @@ export default {
         if (!changed) return;
 
         const newBody = JSON.stringify(parsed);
-        if (plainBody) {
+        if (bodyKind === "string") {
           req.body = newBody;
+        } else if (raw instanceof Uint8Array) {
+          req.body = new TextEncoder().encode(newBody);
         } else {
-          event.request = new Request(req.url, {
-            method: req.method,
-            headers: req.headers,
+          event.request = new Request(req.url as string, {
+            method: req.method as string,
+            headers: req.headers as HeadersInit,
             body: newBody,
           });
         }
-        dump("strict-stripped", { tools: parsed.tools?.length });
+        dump("strict-stripped", { bodyKind, tools: parsed.tools?.length });
       },
       { providerID: "bobshell" },
     );
@@ -137,7 +166,18 @@ export default {
     );
     await ctx.session.hook(
       "http.response",
-      (event) => dump("http.response", shape(event)),
+      async (event) => {
+        const resp = (event as { response?: Response }).response;
+        let body: string | undefined;
+        try {
+          if (typeof resp?.clone === "function") {
+            body = (await resp.clone().text()).slice(0, 1500);
+          }
+        } catch {
+          // streaming bodies may not clone; ignore
+        }
+        dump("http.response", { status: resp?.status, body });
+      },
       { providerID: "bobshell" },
     );
   },
