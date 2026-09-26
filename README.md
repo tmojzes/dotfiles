@@ -25,8 +25,9 @@ stow nvim # Just my neovim config
 ## Dev environment (Nix)
 
 Dev tools (languages, editors, linters, git/CLI utilities, AI CLIs, k8s/infra tooling) are
-managed by home-manager via the `nix` package. Homebrew is only used for casks (GUI apps and
-fonts); no brew formulae are installed.
+managed by home-manager via the `nix` package. Graphical applications are managed
+declaratively per platform: on Linux through `nix-flatpak` (`gui.nix`), and on macOS
+through `home-manager-brew` (`gui-darwin.nix`) for casks; no brew formulae are installed.
 
 1. Install [Determinate Nix](https://determinate.systems/nix/):
 
@@ -34,15 +35,17 @@ fonts); no brew formulae are installed.
    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
    ```
 
-2. Stow the config and activate it (Linux uses `tmojzes`, macOS uses `tmojzes-mac`):
+2. Stow the config and activate it:
 
    ```bash
    stow nix
-   nix run home-manager/master -- switch --flake ~/.config/home-manager#tmojzes-mac # macOS
-   nix run home-manager/master -- switch --flake ~/.config/home-manager            # Linux
+   # Bootstrap with home-manager (pick the target matching your host architecture):
+   nix run github:nix-community/home-manager -- switch --flake "$HOME/.config/home-manager#tmojzes-x86_64-linux" # x86_64 Linux
+   nix run github:nix-community/home-manager -- switch --flake "$HOME/.config/home-manager#tmojzes"              # aarch64 Linux
+   nix run github:nix-community/home-manager -- switch --flake "$HOME/.config/home-manager#tmojzes-mac"          # macOS
    ```
 
-After the first activation, use `home-manager switch` instead of `nix run ...`.
+After the first activation, use `home-manager switch` (or the `upgrade` function) instead of `nix run ...`.
 
 ## Programs
 

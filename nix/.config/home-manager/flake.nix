@@ -7,6 +7,11 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    home-manager-brew = {
+      url = "github:koalalorenzo/home-manager-brew";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     opencode = {
       url = "github:anomalyco/opencode/v2.0.16";
     };
@@ -16,12 +21,14 @@
     {
       nixpkgs,
       home-manager,
+      nix-flatpak,
+      home-manager-brew,
       opencode,
       ...
     }:
     let
       mkHome =
-        system: homeDirectory:
+        system: homeDirectory: extraModules:
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
@@ -50,12 +57,21 @@
           modules = [
             ./home.nix
             { home.homeDirectory = homeDirectory; }
-          ];
+          ] ++ extraModules;
         };
     in
     {
-      homeConfigurations."tmojzes" = mkHome "aarch64-linux" "/home/tmojzes";
-      homeConfigurations."tmojzes-x86_64-linux" = mkHome "x86_64-linux" "/home/tmojzes";
-      homeConfigurations."tmojzes-mac" = mkHome "aarch64-darwin" "/Users/tmojzes";
+      homeConfigurations."tmojzes" = mkHome "aarch64-linux" "/home/tmojzes" [
+        nix-flatpak.homeManagerModules.nix-flatpak
+        ./gui.nix
+      ];
+      homeConfigurations."tmojzes-x86_64-linux" = mkHome "x86_64-linux" "/home/tmojzes" [
+        nix-flatpak.homeManagerModules.nix-flatpak
+        ./gui.nix
+      ];
+      homeConfigurations."tmojzes-mac" = mkHome "aarch64-darwin" "/Users/tmojzes" [
+        home-manager-brew.homeManagerModules.default
+        ./gui-darwin.nix
+      ];
     };
 }
