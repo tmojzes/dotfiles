@@ -15,3 +15,8 @@ shell/.local/share
 tmux/.config/tmux/plugins
 # mcp server binaries built into ~/.local/bin (stow fold over scripts/.local/bin)
 scripts/.local/bin/*-mcp
+# Antigravity CLI runtime data
+gemini/.gemini/*
+!gemini/.gemini/antigravity-cli
+gemini/.gemini/antigravity-cli/*
+!gemini/.gemini/antigravity-cli/settings.json
