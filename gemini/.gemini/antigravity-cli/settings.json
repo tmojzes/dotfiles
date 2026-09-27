@@ -1,4 +1,5 @@
 {
+  "allowNonWorkspaceAccess": true,
   "deny": [
     "command(rm -rf)",
     "command(curl .*)",
@@ -6,8 +7,6 @@
     "write_file(.git/*)",
     "write_file(/Users/tmojzes/.ssh/*)"
   ],
-  "enableTelemetry": false,
-  "allowNonWorkspaceAccess": true,
   "model": "Gemini 3.8 Flash (High)",
   "permissions": {
     "allow": ["command(*)", "read_file(*)", "write_file(src/*)", "read_url(*)", "mcp(linter/*)"]
@@ -19,6 +18,10 @@
   },
   "trustedWorkspaces": [
     "/Users/tmojzes/projects",
-    "/Users/tmojzes/projects/ibm/satellite/satellite-dev-env"
+    "/var/home/tmojzes",
+    "/var/home/tmojzes/dotfiles",
+    "/var/home/tmojzes/projects/personal/containers",
+    "/var/home/tmojzes/projects/personal/homelab",
+    "/home/tmojzes/dotfiles"
   ]
 }
