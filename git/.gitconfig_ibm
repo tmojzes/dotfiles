@@ -9,3 +9,8 @@
 	format = ssh
 [commit]
 	gpgsign = true
+
+[hook "ciso-vr"]
+	event = pre-commit
+	command = env VR_CONFIG_HOOK_MODE=1 /opt/vault-radar/hooks/pre-commit
+
