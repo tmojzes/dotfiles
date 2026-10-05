@@ -3,22 +3,7 @@ upgrade() {
     print_step() { echo -e "\n\033[1;34m=== $1 ===\033[0m"; }
     print_title() { echo -e "\n\033[1;32m--- $1 ---\033[0m"; }
 
-    print_title "Starting System Updates"
-
-    print_step "System Packages"
-    if command -v brew &>/dev/null; then
-        brew update && brew upgrade && NONINTERACTIVE=1 brew upgrade --cask && brew cleanup
-    elif command -v apt &>/dev/null; then
-        sudo apt update && sudo apt upgrade -y
-    elif command -v dnf &>/dev/null; then
-        sudo dnf upgrade -y
-    elif command -v paru &>/dev/null; then
-        paru -Syyu --noconfirm
-    elif command -v zypper &>/dev/null; then
-        sudo zypper update -y
-    fi
-
-    # 2. Reusable helper for optional tools
+    # Reusable helper for optional tools
     update_tool() {
         local cmd=$1
         local msg=$2
@@ -34,14 +19,24 @@ upgrade() {
         curl -fsSL https://bob.ibm.com/download/bobshell.sh | bash
     }
 
-    update_tool snap "Updating Snaps" sudo snap refresh
-    update_tool flatpak "Updating Flatpaks" flatpak update -y
-    update_tool go-global-update "Updating Go packages" go-global-update
-    update_tool rustup "Updating Rust toolchain" rustup update
-    update_tool bob "Updating Bob" bob_update
+    print_title "Starting System Updates"
+
+    if command -v apt &>/dev/null; then
+        print_step "System Packages"
+        sudo apt update && sudo apt upgrade -y
+    elif command -v dnf &>/dev/null; then
+        print_step "System Packages"
+        sudo dnf upgrade -y
+    elif command -v paru &>/dev/null; then
+        print_step "System Packages"
+        paru -Syyu --noconfirm
+    elif command -v zypper &>/dev/null; then
+        print_step "System Packages"
+        sudo zypper update -y
+    fi
 
     if command -v home-manager &>/dev/null; then
-        print_step "Updating Nix packages"
+        print_step "Updating Nix packages & GUI apps"
         hm_target="tmojzes"
         if [ "$(uname)" = "Darwin" ]; then
             hm_target="tmojzes-mac"
@@ -52,13 +47,26 @@ upgrade() {
             home-manager switch --flake "$HOME/.config/home-manager#$hm_target"
     fi
 
+    update_tool snap "Updating Snaps" sudo snap refresh
+    update_tool go-global-update "Updating Go packages" go-global-update
+    update_tool rustup "Updating Rust toolchain" rustup update
+
     if command -v cargo &>/dev/null; then
         print_step "Updating Rust crates"
+        if ! command -v cargo-binstall &>/dev/null; then
+            curl -fsSL https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+        fi
         if ! cargo install-update -V &>/dev/null; then
-            cargo install cargo-update
+            if command -v cargo-binstall &>/dev/null; then
+                cargo binstall -y cargo-update
+            else
+                cargo install cargo-update
+            fi
         fi
         cargo install-update -a
     fi
+
+    update_tool bob "Updating Bob" bob_update
 
     if command -v ibmcloud &>/dev/null && [ -d "$HOME/ibmcloud_homes" ]; then
         print_step "Updating IBM Cloud Plugins"
