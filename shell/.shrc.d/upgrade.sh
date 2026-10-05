@@ -21,7 +21,10 @@ upgrade() {
 
     print_title "Starting System Updates"
 
-    if command -v apt &>/dev/null; then
+    if command -v bootc &>/dev/null; then
+        print_step "System packages"
+        sudo bootc update
+    elif command -v apt &>/dev/null; then
         print_step "System Packages"
         sudo apt update && sudo apt upgrade -y
     elif command -v dnf &>/dev/null; then
