@@ -3,6 +3,7 @@
 {
   services.flatpak = {
     enable = true;
+    update.onActivation = true;
     remotes = [
       {
         name = "flathub";
