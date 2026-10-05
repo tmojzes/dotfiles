@@ -52,9 +52,17 @@ upgrade() {
 
     update_tool snap "Updating Snaps" sudo snap refresh
     update_tool go-global-update "Updating Go packages" go-global-update
-    update_tool rustup "Updating Rust toolchain" rustup update
+    if command -v rustup &>/dev/null; then
+        if ! rustup show active-toolchain &>/dev/null; then
+            print_step "Installing Rust default toolchain"
+            rustup default stable
+        else
+            print_step "Updating Rust toolchain"
+            rustup update
+        fi
+    fi
 
-    if command -v cargo &>/dev/null; then
+    if cargo -V &>/dev/null; then
         print_step "Updating Rust crates"
         if ! command -v cargo-binstall &>/dev/null; then
             curl -fsSL https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
