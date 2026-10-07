@@ -78,6 +78,7 @@
     tree
     htop
     viddy
+    graphviz
 
     # Shell & dotfiles tooling
     starship
