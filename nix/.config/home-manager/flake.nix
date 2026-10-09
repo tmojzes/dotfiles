@@ -13,7 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     opencode = {
-      url = "github:anomalyco/opencode/v2.0.16";
+      url = "github:anomalyco/opencode/v2.0.26";
+    };
+    nixvim = {
+      url = "github:tmojzes/nixvim/v0.1.0";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -24,12 +28,16 @@
       nix-flatpak,
       home-manager-brew,
       opencode,
+      nixvim,
       ...
     }:
     let
       mkHome =
         system: homeDirectory: extraModules:
         home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = {
+            inherit nixvim;
+          };
           pkgs = import nixpkgs {
             inherit system;
 

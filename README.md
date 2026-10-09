@@ -19,7 +19,8 @@ stow */ # Everything (the '/' ignores the README)
 ```
 
 ```bash
-stow nvim # Just my neovim config
+# Neovim is managed via Nixvim (github:tmojzes/nixvim) through Home Manager.
+# The legacy LazyVim configuration is preserved in nvim/.
 ```
 
 ## Dev environment (Nix)

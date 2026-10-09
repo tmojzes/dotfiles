@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, nixvim, ... }:
 
 {
   home.username = "tmojzes";
@@ -16,7 +16,7 @@
 
   home.packages = with pkgs; [
     # Editors & terminal
-    neovim
+    nixvim.packages.${pkgs.system}.default
     tmux
 
     # Languages & runtimes
