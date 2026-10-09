@@ -9,7 +9,13 @@
   ],
   "model": "Gemini 3.8 Flash (High)",
   "permissions": {
-    "allow": ["command(*)", "read_file(*)", "write_file(src/*)", "read_url(*)", "mcp(linter/*)"]
+    "allow": [
+      "command(*)",
+      "read_file(*)",
+      "write_file(src/*)",
+      "read_url(*)",
+      "mcp(linter/*)"
+    ]
   },
   "statusLine": {
     "type": "",
@@ -22,6 +28,8 @@
     "/var/home/tmojzes/dotfiles",
     "/var/home/tmojzes/projects/personal/containers",
     "/var/home/tmojzes/projects/personal/homelab",
-    "/home/tmojzes/dotfiles"
+    "/home/tmojzes/dotfiles",
+    "/home/tmojzes/projects/personal/homelab",
+    "/var/home/tmojzes/projects/personal/nixvim"
   ]
 }
