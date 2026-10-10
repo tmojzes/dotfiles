@@ -1,6 +1,9 @@
-{ pkgs, lib, nixvim, ... }:
-
 {
+  pkgs,
+  lib,
+  nixvim,
+  ...
+}: {
   home.username = "tmojzes";
   # home.homeDirectory is set per-host in flake.nix.
   home.stateVersion = "26.05";
@@ -14,114 +17,116 @@
   # nixosOptionsDoc ('options.json'). Disable it until upstream is fixed.
   manual.manpages.enable = false;
 
-  home.packages = with pkgs; [
-    # Editors & terminal
-    nixvim.packages.${pkgs.system}.default
-    tmux
+  home.packages = with pkgs;
+    [
+      # Editors & terminal
+      nixvim.packages.${pkgs.system}.default
+      tmux
 
-    # Languages & runtimes
-    beamMinimal29Packages.erlang
-    beamMinimal29Packages.elixir_1_20
-    go
-    nodejs
-    bun
-    (python313.withPackages (ps: with ps; [ pyyaml ]))
-    rustup
-    tinygo
-    zig
-    luarocks
+      # Languages & runtimes
+      beamMinimal29Packages.erlang
+      beamMinimal29Packages.elixir_1_20
+      go
+      nodejs
+      bun
+      (python313.withPackages (ps: with ps; [pyyaml]))
+      rustup
+      tinygo
+      zig
+      luarocks
 
-    # Build & task runners
-    go-task
-    just
+      # Build & task runners
+      go-task
+      just
 
-    # Git & GitHub
-    gh
-    git-lfs
-    lazygit
-    (pre-commit.overridePythonAttrs (_: {
-      doCheck = false;
-      dontUsePytestCheck = true;
-      nativeCheckInputs = [];
-      preCheck = "";
-    }))
+      # Git & GitHub
+      gh
+      git-lfs
+      lazygit
+      (pre-commit.overridePythonAttrs (_: {
+        doCheck = false;
+        dontUsePytestCheck = true;
+        nativeCheckInputs = [];
+        preCheck = "";
+      }))
 
-    # Linters & formatters
-    ast-grep
-    black
-    go-tools
-    golines
-    golangci-lint
-    gofumpt
-    isort
-    markdownlint-cli
-    prettier
-    pylint
-    shellcheck
-    yamllint
-    shfmt
-    python314Packages.bc-detect-secrets
+      # Linters & formatters
+      ast-grep
+      black
+      go-tools
+      golines
+      golangci-lint
+      gofumpt
+      isort
+      markdownlint-cli
+      prettier
+      pylint
+      shellcheck
+      yamllint
+      shfmt
+      python314Packages.bc-detect-secrets
 
-    # Python tooling (pipx and poetry stay on brew)
-    uv
+      # Python tooling (pipx and poetry stay on brew)
+      uv
 
-    # CLI utilities
-    direnv
-    fd
-    fzf
-    lf
-    ripgrep
-    tree-sitter
-    yq-go
-    grafana-loki
-    bottom
-    tree
-    htop
-    viddy
-    graphviz
+      # CLI utilities
+      direnv
+      fd
+      fzf
+      lf
+      ripgrep
+      tree-sitter
+      yq-go
+      grafana-loki
+      bottom
+      tree
+      htop
+      viddy
+      graphviz
 
-    # Shell & dotfiles tooling
-    starship
-    stow
+      # Shell & dotfiles tooling
+      starship
+      stow
 
-    # Docs & diagrams
-    markdown-toc
-    mermaid-cli
-    tectonic
+      # Docs & diagrams
+      markdown-toc
+      mermaid-cli
+      tectonic
 
-    # Web
-    tailwindcss
+      # Web
+      tailwindcss
 
-    # AI tools
-    ollama
-    opencode
-    antigravity-cli
+      # AI tools
+      ollama
+      opencode
+      antigravity-cli
 
-    # Infra & Kubernetes
-    age
-    sops
-    cilium-cli
-    k9s
-    ko
-    kubebuilder
-    # minikube also ships a kubectl binary; prefer the standalone one.
-    (lib.hiPrio kubectl)
-    kubernetes-helm
-    kustomize
-    minikube
-    molecule
-    openshift
-    opentofu
-    operator-sdk
-    talhelper
-    talosctl
-    terraform
-    kubectx
+      # Infra & Kubernetes
+      age
+      sops
+      cilium-cli
+      k9s
+      ko
+      kubebuilder
+      # minikube also ships a kubectl binary; prefer the standalone one.
+      (lib.hiPrio kubectl)
+      kubernetes-helm
+      kustomize
+      minikube
+      molecule
+      openshift
+      opentofu
+      operator-sdk
+      talhelper
+      talosctl
+      terraform
+      kubectx
 
-    # Virtualization
-    qemu
+      # Virtualization
+      qemu
 
-    # Cloud
-    google-cloud-sdk
-  ] ++ lib.optional (pkgs.stdenv.hostPlatform.system == "aarch64-darwin") vfkit;
+      # Cloud
+      google-cloud-sdk
+    ]
+    ++ lib.optional (pkgs.stdenv.hostPlatform.system == "aarch64-darwin") vfkit;
 }
