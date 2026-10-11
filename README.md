@@ -23,30 +23,11 @@ stow */ # Everything (the '/' ignores the README)
 # The legacy LazyVim configuration is preserved in nvim/.
 ```
 
-## Dev environment (Nix)
+## Nix Configuration & Infrastructure
 
-Dev tools (languages, editors, linters, git/CLI utilities, AI CLIs, k8s/infra tooling) are
-managed by home-manager via the `nix` package. Graphical applications are managed
-declaratively per platform: on Linux through `nix-flatpak` (`gui.nix`), and on macOS
-through `home-manager-brew` (`gui-darwin.nix`) for casks; no brew formulae are installed.
-
-1. Install [Determinate Nix](https://determinate.systems/nix/):
-
-   ```bash
-   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-   ```
-
-2. Stow the config and activate it:
-
-   ```bash
-   stow nix
-   # Bootstrap with home-manager (pick the target matching your host architecture):
-   nix run github:nix-community/home-manager -- switch --flake "$HOME/.config/home-manager#tmojzes-x86_64-linux" # x86_64 Linux
-   nix run github:nix-community/home-manager -- switch --flake "$HOME/.config/home-manager#tmojzes"              # aarch64 Linux
-   nix run github:nix-community/home-manager -- switch --flake "$HOME/.config/home-manager#tmojzes-mac"          # macOS
-   ```
-
-After the first activation, use `home-manager switch` (or the `upgrade` function) instead of `nix run ...`.
+System configuration (NixOS), Home Manager, dev tools, and dotfiles (`bob`, `fonts`, `gemini`, `ghostty`, `git`, `lazygit`, `opencode`, `shell`) are managed in the [`infra`](https://github.com/tmojzes/infra) repository.
+- **NixOS**: Rebuild system and user configuration together via `sudo nixos-rebuild switch --flake ~/infra#neo`.
+- **macOS (Apple Silicon)**: Switch Home Manager via `home-manager switch --flake ~/infra#tmojzes-mac`.
 
 ## Programs
 
